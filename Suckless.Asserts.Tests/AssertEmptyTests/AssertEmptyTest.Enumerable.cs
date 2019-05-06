@@ -1,31 +1,32 @@
 using Unit = NUnit.Framework;
 using static Suckless.Asserts.Assertions;
 using System;
+using System.Linq;
 
-namespace Namespace
+namespace Suckless.Asserts.Tests.AssertEmptyTests
 {
     internal partial class AssertEmptyTest
     {
         [Unit.Test]
-        public void Empty_WhenStringIsEmpty_DoNotThrowException()
+        public void Empty_WhenEnumerableIsEmpty_DoNotThrowException()
         {
-            var valueStub = "";
+            var valueStub = Enumerable.Empty<int>();
 
             Assert(valueStub).Empty();
         }
 
         [Unit.Test]
-        public void Empty_WhenStringIsNotEmpty_ThrowsException()
+        public void Empty_WhenEnumerableIsNotEmpty_ThrowsException()
         {
-            var valueStub = "Any";
+            var valueStub = Enumerable.Range(1, 2);
 
             Unit.Assert.Throws<ArgumentOutOfRangeException>(() => Assert(valueStub).Empty());
         }
 
         [Unit.Test]
-        public void Empty_WhenStringIsNotEmptyAndUseCustomeMessage_ThrowsExceptionWithCorrectMessage()
+        public void Empty_WhenEnumerableIsNotEmptyAndUseCustomeMessage_ThrowsExceptionWithCorrectMessage()
         {
-            var valueStub = "Any";
+            var valueStub = Enumerable.Range(1, 2);
             var expectedMessageStub = "Any message";
 
             var actualMessage = Unit.Assert

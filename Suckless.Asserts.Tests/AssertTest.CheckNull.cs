@@ -2,7 +2,7 @@ using Unit = NUnit.Framework;
 using static Suckless.Asserts.Assertions;
 using System;
 
-namespace Namespace
+namespace Suckless.Asserts.Tests
 {
     internal class Assert
     {

@@ -4,5 +4,8 @@ namespace Suckless.Asserts
     {
         public const string MUST_BE_EMPTY = "must be empty.";
         public const string CANNOT_BE_NULL = "cannot be null.";
+
+        public static string CountGreaterThan(int expected, int actual) => 
+            $"contains {actual} but should contain greater than {expected}.";
     }
 }

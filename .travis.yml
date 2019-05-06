@@ -1,0 +1,9 @@
+language: csharp
+mono: none
+dotnet: 2.1.402
+dist: trusty
+solution: Suckless.Assert.sln
+install:
+ - dotnet build
+script:
+ - dotnet test Suckless.Asserts.Tests

@@ -24,7 +24,7 @@ namespace Suckless.Asserts.Tests.AssertEmptyTests
         }
 
         [Unit.Test]
-        public void Empty_WhenEnumerableIsNotEmptyAndUseCustomeMessage_ThrowsExceptionWithCorrectMessage()
+        public void Empty_WhenEnumerableIsNotEmptyAndSpecifieCustomeMessage_ThrowsExceptionWithCorrectMessage()
         {
             var valueStub = Enumerable.Range(1, 2);
             var expectedMessageStub = "Any message";

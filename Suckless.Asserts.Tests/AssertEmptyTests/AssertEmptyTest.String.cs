@@ -23,7 +23,7 @@ namespace Suckless.Asserts.Tests.AssertEmptyTests
         }
 
         [Unit.Test]
-        public void Empty_WhenStringIsNotEmptyAndUseCustomeMessage_ThrowsExceptionWithCorrectMessage()
+        public void Empty_WhenStringIsNotEmptyAndSpecifiedCustomeMessage_ThrowsExceptionWithCorrectMessage()
         {
             var valueStub = "Any";
             var expectedMessageStub = "Any message";

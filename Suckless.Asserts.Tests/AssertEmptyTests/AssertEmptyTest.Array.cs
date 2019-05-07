@@ -23,7 +23,7 @@ namespace Suckless.Asserts.Tests.AssertEmptyTests
         }
 
         [Unit.Test]
-        public void Empty_WhenArrayIsNotEmptyAndUseCustomeMessage_ThrowsExceptionWithCorrectMessage()
+        public void Empty_WhenArrayIsNotEmptyAndSpecifiedCustomeMessage_ThrowsExceptionWithCorrectMessage()
         {
             var valueStub = new int[] { 1 };
             var expectedMessageStub = "Any message";

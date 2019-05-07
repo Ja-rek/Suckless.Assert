@@ -12,7 +12,7 @@ namespace Suckless.Asserts
                 if (length != exact) 
                 {
                     throw new ArgumentOutOfRangeException(null, 
-                        message == null ? metadata.Name + Messages.Lenght(exact, length) : message);
+                        message == null ? metadata.Name + Messages.Length(exact, length) : message);
                 }
             }
 
@@ -30,7 +30,7 @@ namespace Suckless.Asserts
                 if (length < min || length < max)
                 {
                     throw new ArgumentOutOfRangeException(null, 
-                        message == null ? metadata.Name + Messages.Lenght(min, max, length) : message);
+                        message == null ? metadata.Name + Messages.Length(min, max, length) : message);
                 }
             }
 

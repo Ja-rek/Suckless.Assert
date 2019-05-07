@@ -7,6 +7,14 @@ namespace Suckless.Asserts.Tests
     internal class AssertLengthTest
     {
         [Unit.Test]
+        public void Length_WhenAllowNullAndStringIsNull_DoNotThrowException()
+        {
+            string valueStub = null;
+
+            AllowNull.Assert(valueStub).Length(1);
+        }
+
+        [Unit.Test]
         public void Length_WhenLengthIsExact5_DoNotThrowException()
         {
             string valueStub = "123";

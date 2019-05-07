@@ -10,5 +10,11 @@ namespace Suckless.Asserts
 
         public static string CountLessThan(int expected, int actual) => 
             $"contains {actual} but should contain less than {expected}.";
+
+        public static string Lenght(int expected, int actual) => 
+            $"contains {actual} characters but should contain exact {expected}.";
+
+        public static string Lenght(int min, int max, int actual) => 
+            $"contains {actual} characters but should be between {min} and {max}.";
     }
 }

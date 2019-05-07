@@ -7,6 +7,14 @@ namespace Suckless.Asserts.Tests.AssertEmptyTests
     internal partial class AssertEmptyTest
     {
         [Unit.Test]
+        public void Empty_WhenAllowNullAndStringIsNull_DoNotThrowException()
+        {
+            string valueStub = null;
+
+            AllowNull.Assert(valueStub).Empty();
+        }
+
+        [Unit.Test]
         public void Empty_WhenStringIsEmpty_DoNotThrowException()
         {
             var valueStub = "";

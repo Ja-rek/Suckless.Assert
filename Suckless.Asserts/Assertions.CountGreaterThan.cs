@@ -11,12 +11,14 @@ namespace Suckless.Asserts
             int maxNumber,
             string message = null)
         {
-            var count = metadata.Value.Count();
-
-            if (metadata.Value != null && count < maxNumber) 
+            if (metadata.Value != null) 
             {
-                throw new ArgumentOutOfRangeException(null, 
-                    message == null ? Messages.CountGreaterThan(maxNumber, count): message);
+                var count = metadata.Value.Count();
+                if (count < maxNumber) 
+                {
+                    throw new ArgumentOutOfRangeException(null, 
+                        message == null ? Messages.CountGreaterThan(maxNumber, count): message);
+                }
             }
 
             return ref metadata;
@@ -27,12 +29,14 @@ namespace Suckless.Asserts
             int maxNumber,
             string message = null)
         {
-            var count = metadata.Value.Length;
-
-            if (metadata.Value != null && count < maxNumber) 
+            if (metadata.Value != null) 
             {
-                throw new ArgumentOutOfRangeException(null, 
-                    message == null ? Messages.CountGreaterThan(maxNumber, count): message);
+                var count = metadata.Value.Length;
+                if (count < maxNumber) 
+                {
+                    throw new ArgumentOutOfRangeException(null, 
+                        message == null ? Messages.CountGreaterThan(maxNumber, count): message);
+                }
             }
 
             return ref metadata;

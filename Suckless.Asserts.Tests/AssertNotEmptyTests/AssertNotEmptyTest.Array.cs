@@ -7,6 +7,14 @@ namespace Suckless.Asserts.Tests.AssertNotEmptyTests
     internal partial class AssertNotEmptyTest
     {
         [Unit.Test]
+        public void NotEmpty_WhenAllowNullAndArrayIsNull_DoNotThrowException()
+        {
+            int[] valueStub = null;
+
+            AllowNull.Assert(valueStub).NotEmpty();
+        }
+
+        [Unit.Test]
         public void NotEmpty_WhenArrayIsNotEmpty_DoNotThrowException()
         {
             var valueStub = new int[] { 1 };

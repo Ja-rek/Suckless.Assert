@@ -2,11 +2,20 @@ using Unit = NUnit.Framework;
 using static Suckless.Asserts.Assertions;
 using System;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Suckless.Asserts.Tests.AssertCountGreaterThanTests
 {
     internal partial class AssertCountGreaterThanTest 
     {
+        [Unit.Test]
+        public void CountGreaterThan_WhenAllowNullAndEnumerableIsNull_DoNotThrowException()
+        {
+            IEnumerable<int> valueStub = null;
+
+            AllowNull.Assert(valueStub).CountGreaterThan(2);
+        }
+
         [Unit.Test]
         public void CountGreaterThan_WhenCountOfEnumerableIsGreaterThan3_DoNotThrowException()
         {

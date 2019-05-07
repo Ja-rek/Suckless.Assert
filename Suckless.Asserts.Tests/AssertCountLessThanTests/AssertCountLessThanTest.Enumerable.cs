@@ -2,11 +2,20 @@ using Unit = NUnit.Framework;
 using static Suckless.Asserts.Assertions;
 using System;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Suckless.Asserts.Tests.AssertCountLessThanTests
 {
     internal partial class AssertCountLessThanTest 
     {
+        [Unit.Test]
+        public void CountLessThan_WhenAllowNullAndEnumerableIsNull_DoNotThrowException()
+        {
+            IEnumerable<int> valueStub = null;
+
+            AllowNull.Assert(valueStub).CountLessThan(2);
+        }
+
         [Unit.Test]
         public void CountLessThan_WhenCountOfEnumerableIsLessThan6_DoNotThrowException()
         {

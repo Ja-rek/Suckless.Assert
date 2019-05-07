@@ -2,11 +2,20 @@ using Unit = NUnit.Framework;
 using static Suckless.Asserts.Assertions;
 using System;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Suckless.Asserts.Tests.AssertEmptyTests
 {
     internal partial class AssertEmptyTest
     {
+        [Unit.Test]
+        public void Empty_WhenAllowNullAndEnumerableIsNull_DoNotThrowException()
+        {
+            IEnumerable<int> valueStub = null;
+
+            AllowNull.Assert(valueStub).Empty();
+        }
+
         [Unit.Test]
         public void Empty_WhenEnumerableIsEmpty_DoNotThrowException()
         {

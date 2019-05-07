@@ -7,6 +7,14 @@ namespace Suckless.Asserts.Tests.AssertCountGreaterThanTests
     internal partial class AssertCountGreaterThanTest 
     {
         [Unit.Test]
+        public void CountGreaterThan_WhenAllowNullAndArrayIsNull_DoNotThrowException()
+        {
+            int[] valueStub = null;
+
+            AllowNull.Assert(valueStub).CountGreaterThan(2);
+        }
+
+        [Unit.Test]
         public void CountGreaterThan_WhenCountOfArrayIsGreaterThan3_DoNotThrowException()
         {
             var valueStub = new int[] { 1, 2 };

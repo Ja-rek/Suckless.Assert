@@ -7,6 +7,14 @@ namespace Suckless.Asserts.Tests.AssertCountLessThanTests
     internal partial class AssertCountLessThanTest 
     {
         [Unit.Test]
+        public void CountLessThan_WhenAllowNullAndArrayIsNull_DoNotThrowException()
+        {
+            int[] valueStub = null;
+
+            AllowNull.Assert(valueStub).CountLessThan(2);
+        }
+
+        [Unit.Test]
         public void CountLessThan_WhenCountOfArrayIsLessThan2_DoNotThrowException()
         {
             var valueStub = new int[] { 1 };

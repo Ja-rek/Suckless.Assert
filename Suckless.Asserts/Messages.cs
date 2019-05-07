@@ -7,5 +7,8 @@ namespace Suckless.Asserts
 
         public static string CountGreaterThan(int expected, int actual) => 
             $"contains {actual} but should contain greater than {expected}.";
+
+        public static string CountLessThan(int expected, int actual) => 
+            $"contains {actual} but should contain less than {expected}.";
     }
 }

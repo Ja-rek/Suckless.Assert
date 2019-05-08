@@ -1,12 +1,13 @@
 using Unit = NUnit.Framework;
 using static Suckless.Asserts.Assertions;
 using System;
+using NUnit.Framework;
 
 namespace Suckless.Asserts.Tests
 {
-    internal class Assert
+    internal partial class AssertTest
     {
-        [Unit.Test]
+        [Test]
         public void Assert_WhenArgumentIsNull_ThrowsException()
         {
             string valueStub = null;
@@ -14,7 +15,7 @@ namespace Suckless.Asserts.Tests
             Unit.Assert.Throws<ArgumentNullException>(() => Assert(valueStub).Empty());
         }
 
-        [Unit.Test]
+        [Test]
         public void Assert_WhenExpressionIsNull_ThrowsException()
         {
             string valueStub = null;

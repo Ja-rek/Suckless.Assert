@@ -1,4 +1,4 @@
-namespace Suckless.Asserts.Tests.AssertExpressionAsArgumentTests
+namespace Suckless.Asserts.Tests.Base
 {
     internal class ValuesSut
     {

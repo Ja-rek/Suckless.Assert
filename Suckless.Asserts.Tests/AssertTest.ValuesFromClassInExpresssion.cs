@@ -2,10 +2,11 @@ using System;
 using Unit = NUnit.Framework;
 using static Suckless.Asserts.Assertions;
 using NUnit.Framework;
+using Suckless.Asserts.Tests.Base;
 
-namespace Suckless.Asserts.Tests.AssertExpressionAsArgumentTests
+namespace Suckless.Asserts.Tests
 {
-    internal partial class AssertExpressionAsArgumentTest : MetadataFactoryTestBase
+    internal partial class AssertTest : AssertByExpressionTestBase
     {
         [Test]
         public void Assert_WhenArgumentIsVariableFromClass_ReturnsCorrectMetadata()

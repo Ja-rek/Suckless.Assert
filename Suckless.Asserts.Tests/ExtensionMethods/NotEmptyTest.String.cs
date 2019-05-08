@@ -1,43 +1,44 @@
 using Unit = NUnit.Framework;
-using static Suckless.Asserts.Assertions;
 using System;
+using NUnit.Framework;
+using Suckless.Asserts.Tests.Base;
 
-namespace Suckless.Asserts.Tests.AssertNotEmptyTests
+namespace Suckless.Asserts.Tests.ExtensionMethods
 {
-    internal partial class AssertNotEmptyTest
+    internal partial class AssertNotEmptyTest : AssertBaseTest
     {
-        [Unit.Test]
+        [Test]
         public void NotEmpty_WhenAllowNullAndStringIsNull_DoNotThrowException()
         {
             string valueStub = null;
 
-            AllowNull.Assert(valueStub).NotEmpty();
+            Metadata(valueStub).NotEmpty();
         }
 
-        [Unit.Test]
+        [Test]
         public void NotEmpty_WhenStringIsNotEmpty_DoNotThrowException()
         {
             var valueStub = "Any";
 
-            Assert(valueStub).NotEmpty();
+            Metadata(valueStub).NotEmpty();
         }
 
-        [Unit.Test]
+        [Test]
         public void NotEmpty_WhenStringIsEmpty_ThrowsException()
         {
             var valueStub = "";
 
-            Unit.Assert.Throws<ArgumentOutOfRangeException>(() => Assert(valueStub).NotEmpty());
+            Unit.Assert.Throws<ArgumentOutOfRangeException>(() => Metadata(valueStub).NotEmpty());
         }
 
-        [Unit.Test]
+        [Test]
         public void NotEmpty_WhenStringIsEmptyAndSpecifiedCustomeMessage_ThrowsExceptionWithCorrectMessage()
         {
             var valueStub = "";
             var expectedMessageStub = "Any message";
 
             var actualMessage = Unit.Assert
-                .Throws<ArgumentOutOfRangeException>(() => Assert(valueStub).NotEmpty(expectedMessageStub))
+                .Throws<ArgumentOutOfRangeException>(() => Metadata(valueStub).NotEmpty(expectedMessageStub))
                 .Message;
 
             Unit.Assert.AreEqual(expectedMessageStub, actualMessage);

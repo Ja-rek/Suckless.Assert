@@ -2,10 +2,11 @@ using System;
 using NUnit.Framework;
 using Unit = NUnit.Framework;
 using static Suckless.Asserts.Assertions;
+using Suckless.Asserts.Tests.Base;
 
-namespace Suckless.Asserts.Tests.AssertExpressionAsArgumentTests
+namespace Suckless.Asserts.Tests
 {
-    internal partial class AssertExpressionAsArgumentTest : MetadataFactoryTestBase
+    internal partial class AssertTest : AssertByExpressionTestBase
     {
         private const string ANY_VALUE = "any value";
         private string variable = ANY_VALUE;
@@ -14,7 +15,7 @@ namespace Suckless.Asserts.Tests.AssertExpressionAsArgumentTests
         private static string StaticProperty { get; set; } = ANY_VALUE;
 
         [Test]
-        public void MetadataFrom_WhenArgumentIsVariable_ReturnsCorrectMetadata()
+        public void Assert_WhenArgumentIsVariable_ReturnsCorrectMetadata()
         {
             var variable = ANY_VALUE;
 
@@ -25,7 +26,7 @@ namespace Suckless.Asserts.Tests.AssertExpressionAsArgumentTests
         }
 
         [Test]
-        public void MetadataFrom_WhenArgumentIsThisVariable_ReturnsCorrectMetadata()
+        public void Assert_WhenArgumentIsThisVariable_ReturnsCorrectMetadata()
         {
             var actualMetadata = Assert(() => this.variable);
             var expectedMetadata = new Metadata<string>(this.variable, nameof(this.variable));
@@ -34,7 +35,7 @@ namespace Suckless.Asserts.Tests.AssertExpressionAsArgumentTests
         }
 
         [Test]
-        public void MetadataFrom_WhenArgumentIsProperty_ReturnsCorrectMetadata()
+        public void Assert_WhenArgumentIsProperty_ReturnsCorrectMetadata()
         {
             var actualMetadata = Assert(() => Property);
             var expectedMetadata = new Metadata<string>(Property, nameof(Property));
@@ -43,20 +44,20 @@ namespace Suckless.Asserts.Tests.AssertExpressionAsArgumentTests
         }
 
         [Test]
-        public void MetadataFrom_WhenArgumentIsConst_ThrowsApplicationException()
+        public void Assert_WhenArgumentIsConst_ThrowsApplicationException()
         {
             Unit.Assert.Throws<ApplicationException>(() => Assert(() => ANY_VALUE));
         }
 
         [Test]
-        public void MetadataFrom_WhenArgumentIsStaticPropertyOrField_ThrowsApplicationException()
+        public void Assert_WhenArgumentIsStaticPropertyOrField_ThrowsApplicationException()
         {
             Unit.Assert.Throws<ApplicationException>(() => Assert(() => staticVariable));
             Unit.Assert.Throws<ApplicationException>(() => Assert(() => StaticProperty));
         }
 
         [Test]
-        public void MetadataFrom_WhenArgumentIsMethod_ThrowsApplicationException()
+        public void Assert_WhenArgumentIsMethod_ThrowsApplicationException()
         {
             Unit.Assert.Throws<ApplicationException>(() => Assert(() => Method()));
             Unit.Assert.Throws<ApplicationException>(() => Assert(() => StaticMethod()));

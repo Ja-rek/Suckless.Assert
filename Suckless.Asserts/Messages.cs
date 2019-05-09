@@ -5,6 +5,12 @@ namespace Suckless.Asserts
         public const string MUST_BE_EMPTY = "must be empty.";
         public const string CANNOT_BE_NULL = "cannot be null.";
 
+        public static string NumberRange(string expectedMin, string expectedMax, string actual) => 
+            $"is {actual} but should be in range {expectedMin}-{expectedMax}.";
+
+        public static string EnumerableRange(string expectedMin, string expectedMax, string actual) => 
+            $"contains {actual} items but should contain items in range {expectedMin}-{expectedMax}.";
+
         public static string GreaterThan(string expected, string actual) => 
             $"is {actual} but should be greater than {expected}.";
 

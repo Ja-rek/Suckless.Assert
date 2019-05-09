@@ -4,6 +4,7 @@ namespace Suckless.Asserts
     {
         public const string MUST_BE_EMPTY = "must be empty.";
         public const string CANNOT_BE_NULL = "cannot be null.";
+        public const string MUST_BE_POSITIVE = "must be pisitve.";
 
         public static string NumberRange(string expectedMin, string expectedMax, string actual) => 
             $"is {actual} but should be in range {expectedMin}-{expectedMax}.";

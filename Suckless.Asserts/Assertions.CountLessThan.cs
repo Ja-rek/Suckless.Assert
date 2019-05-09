@@ -8,16 +8,16 @@ namespace Suckless.Asserts
     {
         public static ref readonly Metadata<IEnumerable<TValue>> CountLessThan<TValue>(
             in this Metadata<IEnumerable<TValue>> metadata, 
-            int maxNumber,
+            int max,
             string message = null)
         {
             if (metadata.Value != null) 
             {
                 var count = metadata.Value.Count();
-                if (count > maxNumber)
+                if (count > max)
                 {
                     throw new ArgumentOutOfRangeException(null, 
-                        message == null ? Messages.CountLessThan(maxNumber, count): message);
+                        message == null ? Messages.CountLessThan(max, count): message);
                 }
             }
 
@@ -26,16 +26,16 @@ namespace Suckless.Asserts
 
         public static ref readonly Metadata<TValue[]> CountLessThan<TValue>(
             in this Metadata<TValue[]> metadata, 
-            int maxNumber,
+            int max,
             string message = null)
         {
             if (metadata.Value != null) 
             {
                 var count = metadata.Value.Length;
-                if (count > maxNumber)
+                if (count > max)
                 {
                     throw new ArgumentOutOfRangeException(null, 
-                        message == null ? Messages.CountLessThan(maxNumber, count): message);
+                        message == null ? Messages.CountLessThan(max, count): message);
                 }
             }
 

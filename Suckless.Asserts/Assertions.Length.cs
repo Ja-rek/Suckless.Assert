@@ -27,7 +27,7 @@ namespace Suckless.Asserts
             if (metadata.Value != null) 
             {
                 var length = metadata.Value.Length;
-                if (length < min || length < max)
+                if (length < min || length > max)
                 {
                     throw new ArgumentOutOfRangeException(null, 
                         message == null ? metadata.Name + Messages.Length(min, max, length) : message);

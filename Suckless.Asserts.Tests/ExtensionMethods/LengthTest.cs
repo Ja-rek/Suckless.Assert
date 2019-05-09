@@ -44,7 +44,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
         {
             string valueStub = "12345";
 
-            Unit.Assert.Throws<ArgumentOutOfRangeException>(() => Metadata(valueStub).Length(3, 7));
+            Unit.Assert.Throws<ArgumentOutOfRangeException>(() => Metadata(valueStub).Length(3, 4));
         }
 
         [Test]

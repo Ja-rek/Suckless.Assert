@@ -9,7 +9,7 @@ namespace Suckless.Asserts
             short max,
             string message = null)
         {
-            if (metadata.Value < min || metadata.Value < max) 
+            if (metadata.Value < min || metadata.Value > max) 
             {
                 throw new ArgumentOutOfRangeException(null, 
                     message == null ? Messages.NumberRange(min.ToString(), 
@@ -25,7 +25,7 @@ namespace Suckless.Asserts
             ushort max,
             string message = null)
         {
-            if (metadata.Value < min || metadata.Value < max) 
+            if (metadata.Value < min || metadata.Value > max) 
             {
                 throw new ArgumentOutOfRangeException(null, 
                     message == null ? Messages.NumberRange(min.ToString(), 
@@ -42,7 +42,7 @@ namespace Suckless.Asserts
             int max,
             string message = null)
         {
-            if (metadata.Value < min || metadata.Value < max) 
+            if (metadata.Value < min || metadata.Value > max) 
             {
                 throw new ArgumentOutOfRangeException(null, 
                     message == null ? Messages.NumberRange(min.ToString(), 
@@ -58,7 +58,7 @@ namespace Suckless.Asserts
             uint max,
             string message = null)
         {
-            if (metadata.Value < min || metadata.Value < max) 
+            if (metadata.Value < min || metadata.Value > max) 
             {
                 throw new ArgumentOutOfRangeException(null, 
                     message == null ? Messages.NumberRange(min.ToString(), 
@@ -74,7 +74,7 @@ namespace Suckless.Asserts
             long max,
             string message = null)
         {
-            if (metadata.Value < min || metadata.Value < max) 
+            if (metadata.Value < min || metadata.Value > max) 
             {
                 throw new ArgumentOutOfRangeException(null, 
                     message == null ? Messages.NumberRange(min.ToString(), 
@@ -90,7 +90,7 @@ namespace Suckless.Asserts
             ulong max,
             string message = null)
         {
-            if (metadata.Value < min || metadata.Value < max) 
+            if (metadata.Value < min || metadata.Value > max) 
             {
                 throw new ArgumentOutOfRangeException(null, 
                     message == null ? Messages.NumberRange(min.ToString(), 
@@ -106,7 +106,7 @@ namespace Suckless.Asserts
             decimal max,
             string message = null)
         {
-            if (metadata.Value < min || metadata.Value < max) 
+            if (metadata.Value < min || metadata.Value > max) 
             {
                 throw new ArgumentOutOfRangeException(null, 
                     message == null ? Messages.NumberRange(min.ToString(), 
@@ -122,7 +122,7 @@ namespace Suckless.Asserts
             float max,
             string message = null)
         {
-            if (metadata.Value < min || metadata.Value < max) 
+            if (metadata.Value < min || metadata.Value > max) 
             {
                 throw new ArgumentOutOfRangeException(null, 
                     message == null ? Messages.NumberRange(min.ToString(), 
@@ -138,7 +138,7 @@ namespace Suckless.Asserts
             double max,
             string message = null)
         {
-            if (metadata.Value < min || metadata.Value < max) 
+            if (metadata.Value < min || metadata.Value > max) 
             {
                 throw new ArgumentOutOfRangeException(null, 
                     message == null ? Messages.NumberRange(min.ToString(), 

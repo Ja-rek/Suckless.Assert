@@ -1,4 +1,3 @@
-using Unit = NUnit.Framework;
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -7,7 +6,7 @@ using Suckless.Asserts.Tests.Base;
 
 namespace Suckless.Asserts.Tests.ExtensionMethods
 {
-    internal partial class NotEmptyTest : AssertBaseTest
+    internal partial class NotEmptyTest : AssertBaseTest<ArgumentOutOfRangeException> 
     {
         [Test]
         public void NotEmpty_WhenEnumerableIsNull_DoNotThrowException()
@@ -32,27 +31,20 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
         public void NotEmpty_WhenEnumerableIsEmpty_ThrowsException()
         {
             var valueStub = Enumerable.Empty<int>();
+            var messagePart = "cannot be empty.";
 
-            Unit.Assert.Throws<ArgumentOutOfRangeException>(() => Metadata(valueStub).NotEmpty());
-            Unit.Assert.Throws<ArgumentOutOfRangeException>(() => Metadata(valueStub.ToArray()).NotEmpty());
+            AssertExceptionMessage(m => m.NotEmpty(), valueStub, messagePart);
+            AssertExceptionMessage(m => m.NotEmpty(), valueStub.ToArray(), messagePart);
         }
 
         [Test]
         public void NotEmpty_WhenAssertionFailedAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage()
         {
             var valueStub = Enumerable.Empty<int>();
-            var expectedMessageStub = "Any message";
+            var customeMessageStub = "Any message";
 
-            //Assert
-            var actualMessage = Unit.Assert
-                .Throws<ArgumentOutOfRangeException>(() => Metadata(valueStub).NotEmpty(expectedMessageStub))
-                .Message;
-            Unit.Assert.AreEqual(expectedMessageStub, actualMessage);
-
-            var actualMessage2 = Unit.Assert
-                .Throws<ArgumentOutOfRangeException>(() => Metadata(valueStub.ToArray()).NotEmpty(expectedMessageStub))
-                .Message;
-            Unit.Assert.AreEqual(expectedMessageStub, actualMessage2);
+            AssertCustomExceptionMessage(m => m.NotEmpty(customeMessageStub), valueStub, customeMessageStub);
+            AssertCustomExceptionMessage(m => m.NotEmpty(customeMessageStub), valueStub.ToArray(), customeMessageStub);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Suckless.Asserts
         {
             var metadata = new Metadata<TValue>(value, name);
 
-            if (value == null) throw new ArgumentNullException(metadata.Name + Messages.CANNOT_BE_NULL);
+            ThrowWhenNull(value, name);
 
             return metadata;
         }
@@ -47,7 +47,7 @@ namespace Suckless.Asserts
         {
             var metadata = MetadataFactory.MetadataFrom(expression);
 
-            if (metadata.Value == null) throw new ArgumentNullException(metadata.Name + Messages.CANNOT_BE_NULL);
+            ThrowWhenNull(metadata.Value, metadata.Name);
 
             return metadata;
         }
@@ -63,6 +63,11 @@ namespace Suckless.Asserts
             {
                 return MetadataFactory.MetadataFrom(expression);
             }
+        }
+
+        private static void ThrowWhenNull<TValue>(TValue value, string name) 
+        {
+            if (value == null) throw new ArgumentNullException(name + "cannot be null.");
         }
     }
 }

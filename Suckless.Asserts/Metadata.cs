@@ -11,6 +11,7 @@ namespace Suckless.Asserts
         }
 
         public TValue Value { get; }
-        internal string Name => name == null ? $"The value of {typeof(TValue)} " : $"The {name}: {typeof(TValue)} ";
+        internal string Name => 
+            name == null ? $"value: {typeof(TValue).Name}" : $"{name}: {typeof(TValue).Name}";
     }
 }

@@ -11,10 +11,11 @@ namespace Suckless.Asserts
         {
             if (metadata.Value < min || metadata.Value > max) 
             {
-                throw new ArgumentOutOfRangeException(null, 
-                    message == null ? Messages.NumberRange(min.ToString(), 
-                        max.ToString(),
-                        metadata.Value.ToString()): message);
+                ThrowWhenIsNotInRange(metadata.Value.ToString(), 
+                    min.ToString(), 
+                    max.ToString(), 
+                    metadata.Name, 
+                    message);
             }
 
             return ref metadata;
@@ -27,10 +28,11 @@ namespace Suckless.Asserts
         {
             if (metadata.Value < min || metadata.Value > max) 
             {
-                throw new ArgumentOutOfRangeException(null, 
-                    message == null ? Messages.NumberRange(min.ToString(), 
-                        max.ToString(),
-                        metadata.Value.ToString()): message);
+                ThrowWhenIsNotInRange(metadata.Value.ToString(), 
+                    min.ToString(), 
+                    max.ToString(), 
+                    metadata.Name, 
+                    message);
             }
 
             return ref metadata;
@@ -44,10 +46,11 @@ namespace Suckless.Asserts
         {
             if (metadata.Value < min || metadata.Value > max) 
             {
-                throw new ArgumentOutOfRangeException(null, 
-                    message == null ? Messages.NumberRange(min.ToString(), 
-                        max.ToString(),
-                        metadata.Value.ToString()): message);
+                ThrowWhenIsNotInRange(metadata.Value.ToString(), 
+                    min.ToString(), 
+                    max.ToString(), 
+                    metadata.Name, 
+                    message);
             }
 
             return ref metadata;
@@ -60,10 +63,11 @@ namespace Suckless.Asserts
         {
             if (metadata.Value < min || metadata.Value > max) 
             {
-                throw new ArgumentOutOfRangeException(null, 
-                    message == null ? Messages.NumberRange(min.ToString(), 
-                        max.ToString(),
-                        metadata.Value.ToString()): message);
+                ThrowWhenIsNotInRange(metadata.Value.ToString(), 
+                    min.ToString(), 
+                    max.ToString(), 
+                    metadata.Name, 
+                    message);
             }
 
             return ref metadata;
@@ -76,10 +80,11 @@ namespace Suckless.Asserts
         {
             if (metadata.Value < min || metadata.Value > max) 
             {
-                throw new ArgumentOutOfRangeException(null, 
-                    message == null ? Messages.NumberRange(min.ToString(), 
-                        max.ToString(),
-                        metadata.Value.ToString()): message);
+                ThrowWhenIsNotInRange(metadata.Value.ToString(), 
+                    min.ToString(), 
+                    max.ToString(), 
+                    metadata.Name, 
+                    message);
             }
 
             return ref metadata;
@@ -92,10 +97,11 @@ namespace Suckless.Asserts
         {
             if (metadata.Value < min || metadata.Value > max) 
             {
-                throw new ArgumentOutOfRangeException(null, 
-                    message == null ? Messages.NumberRange(min.ToString(), 
-                        max.ToString(),
-                        metadata.Value.ToString()): message);
+                ThrowWhenIsNotInRange(metadata.Value.ToString(), 
+                    min.ToString(), 
+                    max.ToString(), 
+                    metadata.Name, 
+                    message);
             }
 
             return ref metadata;
@@ -108,10 +114,11 @@ namespace Suckless.Asserts
         {
             if (metadata.Value < min || metadata.Value > max) 
             {
-                throw new ArgumentOutOfRangeException(null, 
-                    message == null ? Messages.NumberRange(min.ToString(), 
-                        max.ToString(),
-                        metadata.Value.ToString()): message);
+                ThrowWhenIsNotInRange(metadata.Value.ToString(), 
+                    min.ToString(), 
+                    max.ToString(), 
+                    metadata.Name, 
+                    message);
             }
 
             return ref metadata;
@@ -124,10 +131,11 @@ namespace Suckless.Asserts
         {
             if (metadata.Value < min || metadata.Value > max) 
             {
-                throw new ArgumentOutOfRangeException(null, 
-                    message == null ? Messages.NumberRange(min.ToString(), 
-                        max.ToString(),
-                        metadata.Value.ToString()): message);
+                ThrowWhenIsNotInRange(metadata.Value.ToString(), 
+                    min.ToString(), 
+                    max.ToString(), 
+                    metadata.Name, 
+                    message);
             }
 
             return ref metadata;
@@ -140,13 +148,21 @@ namespace Suckless.Asserts
         {
             if (metadata.Value < min || metadata.Value > max) 
             {
-                throw new ArgumentOutOfRangeException(null, 
-                    message == null ? Messages.NumberRange(min.ToString(), 
-                        max.ToString(),
-                        metadata.Value.ToString()): message);
+                ThrowWhenIsNotInRange(metadata.Value.ToString(), 
+                    min.ToString(), 
+                    max.ToString(), 
+                    metadata.Name, 
+                    message);
             }
 
             return ref metadata;
+        }
+
+        private static void ThrowWhenIsNotInRange(string value, string min, string max, string name , string message)
+        {
+            throw new ArgumentOutOfRangeException(null, message == null 
+                ? $"The {name} contains the number {value} but should contain a number in range {min} - {max}." 
+                : message);
         }
     }
 }

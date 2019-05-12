@@ -1,11 +1,10 @@
-using Unit = NUnit.Framework;
 using System;
 using NUnit.Framework;
 using Suckless.Asserts.Tests.Base;
 
 namespace Suckless.Asserts.Tests.ExtensionMethods
 {
-    internal class PositiveTest : AssertBaseTest
+    internal class PositiveTest : AssertBaseTest<ArgumentException>
     {
         [Test]
         public void Positive_WhenNumberIsPositive_DoNotThrowException()
@@ -24,34 +23,28 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
         public void Positive_WhenNumberIsNotPositive_ThrowsException()
         {
             var valueStub = -1;
+            var messagePart = "must be positive.";
 
-            Unit.Assert.Throws<ArgumentException>(() => Metadata((short)valueStub).Positive());
-            Unit.Assert.Throws<ArgumentException>(() => Metadata((int)valueStub).Positive());
-            Unit.Assert.Throws<ArgumentException>(() => Metadata((long)valueStub).Positive());
-            Unit.Assert.Throws<ArgumentException>(() => Metadata((decimal)valueStub).Positive());
-            Unit.Assert.Throws<ArgumentException>(() => Metadata((float)valueStub).Positive());
-            Unit.Assert.Throws<ArgumentException>(() => Metadata((double)valueStub).Positive());
+            AssertExceptionMessage<short>(m => m.Positive(), valueStub, messagePart);
+            AssertExceptionMessage<int>(m => m.Positive(), valueStub, messagePart);
+            AssertExceptionMessage<long>(m => m.Positive(), valueStub, messagePart);
+            AssertExceptionMessage<decimal>(m => m.Positive(), valueStub, messagePart);
+            AssertExceptionMessage<float>(m => m.Positive(), valueStub, messagePart);
+            AssertExceptionMessage<double>(m => m.Positive(), valueStub, messagePart);
         }
 
         [Test]
-        public void Positive_WhenAssertionFailedAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage()
+        public void Positive_WhenNumberIsNotPositiveAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage()
         {
             var valueStub = -1;
-            var expectedMessageStub = "Any message";
+            var customeMessageStub = "Any message";
 
-            AssertExceptionMessage(() => Metadata((short)valueStub).Positive(expectedMessageStub), expectedMessageStub);
-            AssertExceptionMessage(() => Metadata((int)valueStub).Positive(expectedMessageStub), expectedMessageStub);
-            AssertExceptionMessage(() => Metadata((long)valueStub).Positive(expectedMessageStub), expectedMessageStub);
-            AssertExceptionMessage(() => Metadata((decimal)valueStub).Positive(expectedMessageStub), expectedMessageStub);
-            AssertExceptionMessage(() => Metadata((float)valueStub).Positive(expectedMessageStub), expectedMessageStub);
-            AssertExceptionMessage(() => Metadata((double)valueStub).Positive(expectedMessageStub), expectedMessageStub);
-        }
-
-        public void AssertExceptionMessage(TestDelegate code, string expectedMessageStub)
-        {
-            var actualMessage = Unit.Assert .Throws<ArgumentException>(code).Message;
-            Console.WriteLine(actualMessage);
-            Unit.Assert.AreEqual(expectedMessageStub, actualMessage);
+            AssertCustomExceptionMessage<short>(m => m.Positive(customeMessageStub), valueStub, customeMessageStub);
+            AssertCustomExceptionMessage<int>(m => m.Positive(customeMessageStub), valueStub, customeMessageStub);
+            AssertCustomExceptionMessage<long>(m => m.Positive(customeMessageStub), valueStub, customeMessageStub);
+            AssertCustomExceptionMessage<decimal>(m => m.Positive(customeMessageStub), valueStub, customeMessageStub);
+            AssertCustomExceptionMessage<float>(m => m.Positive(customeMessageStub), valueStub, customeMessageStub);
+            AssertCustomExceptionMessage<decimal>(m => m.Positive(customeMessageStub), valueStub, customeMessageStub);
         }
     }
 }

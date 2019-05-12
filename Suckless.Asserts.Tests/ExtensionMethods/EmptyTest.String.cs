@@ -1,11 +1,10 @@
-using Unit = NUnit.Framework;
 using System;
 using NUnit.Framework;
 using Suckless.Asserts.Tests.Base;
 
 namespace Suckless.Asserts.Tests.ExtensionMethods
 {
-    internal partial class EmptyTest : AssertBaseTest
+    internal partial class EmptyTest : AssertBaseTest<ArgumentOutOfRangeException> 
     {
         [Test]
         public void Empty_WhenStringIsNull_DoNotThrowException()
@@ -27,21 +26,20 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
         public void Empty_WhenStringIsNotEmpty_ThrowsException()
         {
             var valueStub = "Any";
+            var messagePart = "must be empty.";
 
-            Unit.Assert.Throws<ArgumentOutOfRangeException>(() => Metadata(valueStub).Empty());
+            AssertExceptionMessage(m => m.Empty(), valueStub, messagePart);
         }
 
         [Test]
         public void Empty_WhenAssertionFailedAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage()
         {
             var valueStub = "Any";
-            var expectedMessageStub = "Any message";
+            var customeMessageStub = "Any message";
 
-            var actualMessage = Unit.Assert
-                .Throws<ArgumentOutOfRangeException>(() => Metadata(valueStub).Empty(expectedMessageStub))
-                .Message;
-
-            Unit.Assert.AreEqual(expectedMessageStub, actualMessage);
+            AssertCustomExceptionMessage(m => m.Empty(customeMessageStub), 
+                valueStub, 
+                customeMessageStub);
         }
     }
 }

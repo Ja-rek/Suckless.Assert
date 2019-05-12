@@ -8,10 +8,9 @@ namespace Suckless.Asserts
     {
         public static ref readonly Metadata<string> NotEmpty(in this Metadata<string> metadata, string message = null)
         {
-            if (metadata.Value != null && metadata.Value.Length == 0) 
+            if (metadata.Value != null) 
             {
-                throw new ArgumentOutOfRangeException(null, 
-                    message == null ? metadata.Name + Messages.MUST_BE_EMPTY : message);
+                ThrowWhenEmpty(metadata.Value.Length, metadata.Name, message);
             }
 
             return ref metadata;
@@ -21,10 +20,9 @@ namespace Suckless.Asserts
             in this Metadata<IEnumerable<TValue>> metadata,
             string message = null)
         {
-            if (metadata.Value != null && metadata.Value.Count() == 0) 
+            if (metadata.Value != null) 
             {
-                throw new ArgumentOutOfRangeException(null, 
-                    message == null ? metadata.Name + Messages.MUST_BE_EMPTY : message);
+                ThrowWhenEmpty(metadata.Value.Count(), metadata.Name, message);
             }
 
             return ref metadata;
@@ -33,13 +31,22 @@ namespace Suckless.Asserts
         public static ref readonly Metadata<TValue[]> NotEmpty<TValue>(in this Metadata<TValue[]> metadata,
             string message = null)
         {
-            if (metadata.Value != null && metadata.Value.Length == 0) 
+            if (metadata.Value != null) 
             {
-                throw new ArgumentOutOfRangeException(null, 
-                    message == null ? metadata.Name + Messages.MUST_BE_EMPTY : message);
+                ThrowWhenEmpty(metadata.Value.Length, metadata.Name, message);
             }
 
             return ref metadata;
+        }
+
+        private static void ThrowWhenEmpty(int count, string name , string message)
+        {
+            if (count == 0) 
+            {
+                throw new ArgumentOutOfRangeException(null, message == null 
+                    ? $"The {name} cannot be empty." 
+                    : message);
+            }
         }
     }
 }

@@ -5,7 +5,7 @@ using Suckless.Asserts.Tests.Base;
 
 namespace Suckless.Asserts.Tests.ExtensionMethods
 {
-    internal partial class AssertNotEmptyTest : AssertBaseTest
+    internal partial class AssertNotEmptyTest : AssertBaseTest<ArgumentOutOfRangeException> 
     {
         [Test]
         public void NotEmpty_WhenAllowNullAndStringIsNull_DoNotThrowException()
@@ -27,21 +27,20 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
         public void NotEmpty_WhenStringIsEmpty_ThrowsException()
         {
             var valueStub = "";
+            var messagePart = "cannot be empty.";
 
-            Unit.Assert.Throws<ArgumentOutOfRangeException>(() => Metadata(valueStub).NotEmpty());
+            AssertExceptionMessage(m => m.NotEmpty(), valueStub, messagePart);
         }
 
         [Test]
         public void NotEmpty_WhenStringIsEmptyAndSpecifiedCustomeMessage_ThrowsExceptionWithCorrectMessage()
         {
             var valueStub = "";
-            var expectedMessageStub = "Any message";
+            var customeMessageStub = "Any message";
 
-            var actualMessage = Unit.Assert
-                .Throws<ArgumentOutOfRangeException>(() => Metadata(valueStub).NotEmpty(expectedMessageStub))
-                .Message;
-
-            Unit.Assert.AreEqual(expectedMessageStub, actualMessage);
+            AssertCustomExceptionMessage(m => m.NotEmpty(customeMessageStub), 
+                valueStub, 
+                customeMessageStub);
         }
     }
 }

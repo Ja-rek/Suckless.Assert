@@ -4,32 +4,13 @@ namespace Suckless.Asserts
 {
     public static partial class Assertions
     {
-        public static ref readonly Metadata<string> LessThan(in this Metadata<string> metadata, 
-            int max, 
-            string message = null)
-        {
-            if (metadata.Value != null) 
-            {
-                var length = metadata.Value.Length;
-                if (length > max)
-                {
-                    throw new ArgumentOutOfRangeException(null, 
-                        message == null ? Messages.LessThan(max.ToString(), 
-                            metadata.Value.ToString()): message);
-                }
-            }
-
-            return ref metadata;
-        }
-
         public static ref readonly Metadata<short> LessThan(in this Metadata<short> metadata, 
             short max,
             string message = null)
         {
             if (metadata.Value > max) 
             {
-                throw new ArgumentOutOfRangeException(null, 
-                    message == null ? Messages.LessThan(max.ToString(), metadata.Value.ToString()): message);
+                ThrowWhenNotLess(metadata.Value.ToString(), max.ToString(), metadata.Name, message);
             }
 
             return ref metadata;
@@ -41,8 +22,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value > max) 
             {
-                throw new ArgumentOutOfRangeException(null, 
-                    message == null ? Messages.LessThan(max.ToString(), metadata.Value.ToString()): message);
+                ThrowWhenNotLess(metadata.Value.ToString(), max.ToString(), metadata.Name, message);
             }
 
             return ref metadata;
@@ -55,8 +35,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value > max) 
             {
-                throw new ArgumentOutOfRangeException(null, 
-                    message == null ? Messages.LessThan(max.ToString(), metadata.Value.ToString()): message);
+                ThrowWhenNotLess(metadata.Value.ToString(), max.ToString(), metadata.Name, message);
             }
 
             return ref metadata;
@@ -68,8 +47,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value > max) 
             {
-                throw new ArgumentOutOfRangeException(null, 
-                    message == null ? Messages.LessThan(max.ToString(), metadata.Value.ToString()): message);
+                ThrowWhenNotLess(metadata.Value.ToString(), max.ToString(), metadata.Name, message);
             }
 
             return ref metadata;
@@ -81,8 +59,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value > max) 
             {
-                throw new ArgumentOutOfRangeException(null, 
-                    message == null ? Messages.LessThan(max.ToString(), metadata.Value.ToString()): message);
+                ThrowWhenNotLess(metadata.Value.ToString(), max.ToString(), metadata.Name, message);
             }
 
             return ref metadata;
@@ -94,8 +71,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value > max) 
             {
-                throw new ArgumentOutOfRangeException(null, 
-                    message == null ? Messages.LessThan(max.ToString(), metadata.Value.ToString()): message);
+                ThrowWhenNotLess(metadata.Value.ToString(), max.ToString(), metadata.Name, message);
             }
 
             return ref metadata;
@@ -107,8 +83,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value > max) 
             {
-                throw new ArgumentOutOfRangeException(null, 
-                    message == null ? Messages.LessThan(max.ToString(), metadata.Value.ToString()): message);
+                ThrowWhenNotLess(metadata.Value.ToString(), max.ToString(), metadata.Name, message);
             }
 
             return ref metadata;
@@ -120,8 +95,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value > max) 
             {
-                throw new ArgumentOutOfRangeException(null, 
-                    message == null ? Messages.LessThan(max.ToString(), metadata.Value.ToString()): message);
+                ThrowWhenNotLess(metadata.Value.ToString(), max.ToString(), metadata.Name, message);
             }
 
             return ref metadata;
@@ -133,11 +107,17 @@ namespace Suckless.Asserts
         {
             if (metadata.Value > max) 
             {
-                throw new ArgumentOutOfRangeException(null, 
-                    message == null ? Messages.LessThan(max.ToString(), metadata.Value.ToString()): message);
+                ThrowWhenNotLess(metadata.Value.ToString(), max.ToString(), metadata.Name, message);
             }
 
             return ref metadata;
+        }
+
+        private static void ThrowWhenNotLess(string value, string max, string name , string message)
+        {
+            throw new ArgumentOutOfRangeException(null, message == null 
+                ? $"The {name} contains the number {value} but should contain a number less than {max}."
+                : message);
         }
     }
 }

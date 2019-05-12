@@ -1,11 +1,10 @@
-using Unit = NUnit.Framework;
 using System;
 using NUnit.Framework;
 using Suckless.Asserts.Tests.Base;
 
 namespace Suckless.Asserts.Tests.ExtensionMethods
 {
-    internal class ZeroTest : AssertBaseTest
+    internal class ZeroTest : AssertBaseTest<ArgumentException>
     {
         [Test]
         public void Zero_WhenNumberIsZero_DoNotThrowException()
@@ -13,11 +12,8 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
             var valueStub = 0;
 
             Metadata((short)valueStub).Zero();
-            Metadata((ushort)valueStub).Zero();
             Metadata((int)valueStub).Zero();
-            Metadata((uint)valueStub).Zero();
             Metadata((long)valueStub).Zero();
-            Metadata((ulong)valueStub).Zero();
             Metadata((decimal)valueStub).Zero();
             Metadata((float)valueStub).Zero();
             Metadata((double)valueStub).Zero();
@@ -27,39 +23,28 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
         public void Zero_WhenNumberIsNotZero_ThrowsException()
         {
             var valueStub = 1;
+            var messagePart = "must be zero.";
 
-            Unit.Assert.Throws<ArgumentException>(() => Metadata((short)valueStub).Zero());
-            Unit.Assert.Throws<ArgumentException>(() => Metadata((ushort)valueStub).Zero());
-            Unit.Assert.Throws<ArgumentException>(() => Metadata((int)valueStub).Zero());
-            Unit.Assert.Throws<ArgumentException>(() => Metadata((uint)valueStub).Zero());
-            Unit.Assert.Throws<ArgumentException>(() => Metadata((long)valueStub).Zero());
-            Unit.Assert.Throws<ArgumentException>(() => Metadata((ulong)valueStub).Zero());
-            Unit.Assert.Throws<ArgumentException>(() => Metadata((decimal)valueStub).Zero());
-            Unit.Assert.Throws<ArgumentException>(() => Metadata((float)valueStub).Zero());
-            Unit.Assert.Throws<ArgumentException>(() => Metadata((double)valueStub).Zero());
+            AssertExceptionMessage<short>(m => m.Zero(), valueStub, messagePart);
+            AssertExceptionMessage<int>(m => m.Zero(), valueStub, messagePart);
+            AssertExceptionMessage<long>(m => m.Zero(), valueStub, messagePart);
+            AssertExceptionMessage<decimal>(m => m.Zero(), valueStub, messagePart);
+            AssertExceptionMessage<float>(m => m.Zero(), valueStub, messagePart);
+            AssertExceptionMessage<double>(m => m.Zero(), valueStub, messagePart);
         }
 
         [Test]
-        public void Zero_WhenAssertionFailedAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage()
+        public void Zero_WhenNumberIsNotZeroAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage()
         {
             var valueStub = 1;
-            var expectedMessageStub = "Any message";
+            var customeMessageStub = "Any message";
 
-            AssertExceptionMessage(() => Metadata((short)valueStub).Zero(expectedMessageStub), expectedMessageStub);
-            AssertExceptionMessage(() => Metadata((ushort)valueStub).Zero(expectedMessageStub), expectedMessageStub);
-            AssertExceptionMessage(() => Metadata((int)valueStub).Zero(expectedMessageStub), expectedMessageStub);
-            AssertExceptionMessage(() => Metadata((uint)valueStub).Zero(expectedMessageStub), expectedMessageStub);
-            AssertExceptionMessage(() => Metadata((long)valueStub).Zero(expectedMessageStub), expectedMessageStub);
-            AssertExceptionMessage(() => Metadata((ulong)valueStub).Zero(expectedMessageStub), expectedMessageStub);
-            AssertExceptionMessage(() => Metadata((decimal)valueStub).Zero(expectedMessageStub), expectedMessageStub);
-            AssertExceptionMessage(() => Metadata((float)valueStub).Zero(expectedMessageStub), expectedMessageStub);
-            AssertExceptionMessage(() => Metadata((double)valueStub).Zero(expectedMessageStub), expectedMessageStub);
-        }
-
-        public void AssertExceptionMessage(TestDelegate code, string expectedMessageStub)
-        {
-            var actualMessage = Unit.Assert .Throws<ArgumentException>(code) .Message;
-            Unit.Assert.AreEqual(expectedMessageStub, actualMessage);
+            AssertCustomExceptionMessage<short>(m => m.Zero(customeMessageStub), valueStub, customeMessageStub);
+            AssertCustomExceptionMessage<int>(m => m.Zero(customeMessageStub), valueStub, customeMessageStub);
+            AssertCustomExceptionMessage<long>(m => m.Zero(customeMessageStub), valueStub, customeMessageStub);
+            AssertCustomExceptionMessage<decimal>(m => m.Zero(customeMessageStub), valueStub, customeMessageStub);
+            AssertCustomExceptionMessage<float>(m => m.Zero(customeMessageStub), valueStub, customeMessageStub);
+            AssertCustomExceptionMessage<decimal>(m => m.Zero(customeMessageStub), valueStub, customeMessageStub);
         }
     }
 }

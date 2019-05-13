@@ -32,7 +32,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
         }
 
         [Test]
-        public void Count_WhenCountIsNotAsExpecptedNumber_ThrowsException()
+        public void Count_WhenCountIsNotAsExpecptedNumber_ThrowsExceptionWithCorrectMessage()
         {
             string valueStub = "123";
             var messagePart = "contains 3 character/s but should contain exact 5.";

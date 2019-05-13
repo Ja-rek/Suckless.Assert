@@ -23,7 +23,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
         }
 
         [Test]
-        public void Empty_WhenStringIsNotEmpty_ThrowsException()
+        public void Empty_WhenStringIsNotEmpty_ThrowsExceptionWithCorrectMessage()
         {
             var valueStub = "Any";
             var messagePart = "must be empty.";

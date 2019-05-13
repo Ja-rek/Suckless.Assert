@@ -23,7 +23,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
         }
 
         [Test]
-        public void Equal_WhenValueIsNotEqualToExpectedValue_ThrowsException()
+        public void Equal_WhenValueIsNotEqualToExpectedValue_ThrowsExceptionWithCorrectMessage()
         {
             var valueStub = 1;
             var messagePart = "that contain 1 should be equal to 2.";

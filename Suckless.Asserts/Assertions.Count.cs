@@ -51,7 +51,7 @@ namespace Suckless.Asserts
             if (metadata.Value != null) 
             {
                 var count = metadata.Value.Count();
-                ThrowWhenCountIsNotExact(count, exact, metadata.Name, message);
+                if (count != exact) throw ExceptionCountIsNotExact(count, exact, metadata.Name, message);
             }
 
             return ref metadata;
@@ -64,7 +64,7 @@ namespace Suckless.Asserts
             if (metadata.Value != null) 
             {
                 var count = metadata.Value.Length;
-                ThrowWhenCountIsNotExact(count, exact, metadata.Name, message);
+                if (count != exact) throw ExceptionCountIsNotExact(count, exact, metadata.Name, message);
             }
 
             return ref metadata;
@@ -79,7 +79,10 @@ namespace Suckless.Asserts
             if (metadata.Value != null) 
             {
                 var count = metadata.Value.Count();
-                ThrowWhenCountIsNotInRange(count, min, max, metadata.Name, message);
+                if (count < min || count > max)
+                {
+                    throw ExceptionCountIsNotInRange(count, min, max, metadata.Name, message);
+                }
             }
 
             return ref metadata;
@@ -93,30 +96,27 @@ namespace Suckless.Asserts
             if (metadata.Value != null) 
             {
                 var count = metadata.Value.Length;
-                ThrowWhenCountIsNotInRange(count, min, max, metadata.Name, message);
+                if (count < min || count > max)
+                {
+                    throw ExceptionCountIsNotInRange(count, min, max, metadata.Name, message);
+                }
             }
 
             return ref metadata;
         }
 
-        private static void ThrowWhenCountIsNotInRange(int count, int min, int max, string name , string message)
+        private static ArgumentOutOfRangeException ExceptionCountIsNotInRange(int count, int min, int max, string name , string message)
         {
-            if (count < min || count > max)
-            {
-                throw new ArgumentOutOfRangeException(null, message == null 
-                    ? $"The {name} contains {count} item/s but should contain between {min} - {max}." 
-                    : message);
-            }
+            return new ArgumentOutOfRangeException(null, message == null 
+                ? $"The {name} contains {count} item/s but should contain between {min} - {max}." 
+                : message);
         }
 
-        private static void ThrowWhenCountIsNotExact(int count, int exact, string name , string message)
+        private static ArgumentOutOfRangeException ExceptionCountIsNotExact(int count, int exact, string name , string message)
         {
-            if (count != exact) 
-            {
-                throw new ArgumentOutOfRangeException(null, message == null 
-                    ? $"The {name} contains {count} item/s but should contain exact {exact}." 
-                    : message);
-            }
+            return new ArgumentOutOfRangeException(null, message == null 
+                ? $"The {name} contains {count} item/s but should contain exact {exact}." 
+                : message);
         }
     }
 }

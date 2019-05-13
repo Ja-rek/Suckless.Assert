@@ -8,7 +8,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value != 0) 
             {
-                ThrowWhenNotZero(metadata.Name , message);
+                throw ExceptionNotZero(metadata.Name , message);
             }
 
             return ref metadata;
@@ -18,7 +18,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value != 0) 
             {
-                ThrowWhenNotZero(metadata.Name , message);
+                throw ExceptionNotZero(metadata.Name , message);
             }
 
             return ref metadata;
@@ -28,7 +28,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value != 0) 
             {
-                ThrowWhenNotZero(metadata.Name , message);
+                throw ExceptionNotZero(metadata.Name , message);
             }
 
             return ref metadata;
@@ -38,7 +38,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value != 0) 
             {
-                ThrowWhenNotZero(metadata.Name , message);
+                throw ExceptionNotZero(metadata.Name , message);
             }
 
             return ref metadata;
@@ -48,7 +48,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value != 0) 
             {
-                ThrowWhenNotZero(metadata.Name , message);
+                throw ExceptionNotZero(metadata.Name , message);
             }
 
             return ref metadata;
@@ -58,7 +58,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value != 0) 
             {
-                ThrowWhenNotZero(metadata.Name , message);
+                throw ExceptionNotZero(metadata.Name , message);
             }
 
             return ref metadata;
@@ -68,7 +68,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value != 0) 
             {
-                ThrowWhenNotZero(metadata.Name , message);
+                throw ExceptionNotZero(metadata.Name , message);
             }
 
             return ref metadata;
@@ -78,7 +78,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value != 0) 
             {
-                ThrowWhenNotZero(metadata.Name , message);
+                throw ExceptionNotZero(metadata.Name , message);
             }
 
             return ref metadata;
@@ -88,15 +88,15 @@ namespace Suckless.Asserts
         {
             if (metadata.Value != 0) 
             {
-                ThrowWhenNotZero(metadata.Name , message);
+                throw ExceptionNotZero(metadata.Name , message);
             }
 
             return ref metadata;
         }
 
-        private static void ThrowWhenNotZero(string name , string message)
+        private static ArgumentException ExceptionNotZero(string name , string message)
         {
-            throw new ArgumentException(message == null ? $"The {name} must be zero." : message);
+            return new ArgumentException(message == null ? $"The {name} must be zero." : message);
         }
     }
 }

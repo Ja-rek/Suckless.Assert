@@ -7,7 +7,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
     internal class GreaterTest : AssertBaseTest<ArgumentOutOfRangeException> 
     {
         [Test]
-        public void Greater_WhenNumberIsGreater1_DoNotThrowException()
+        public void Greater_WhenNumberIsGreaterThanExpectedNumber_DoNotThrowException()
         {
             var valueStub = 2;
 
@@ -23,7 +23,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
         }
 
         [Test]
-        public void Greater_WhenNumberIsNotGreater2_ThrowsException()
+        public void Greater_WhenNumberIsNotGreaterThanExpectedNumber_ThrowsExceptionWithCorrectMessage()
         {
             var valueStub = 1;
             var messagePart = $"contains the number {valueStub} but should contain a number greater than 2.";

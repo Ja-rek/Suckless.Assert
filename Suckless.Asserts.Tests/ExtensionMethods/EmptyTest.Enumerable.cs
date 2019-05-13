@@ -28,7 +28,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
         }
 
         [Test]
-        public void Empty_WhenEnumerableIsNotEmpty_ThrowsException()
+        public void Empty_WhenEnumerableIsNotEmpty_ThrowsExceptionWithCorrectMessage()
         {
             var valueStub = Enumerable.Range(1, 2);
             var messagePart = "must be empty.";

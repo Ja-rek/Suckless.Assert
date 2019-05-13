@@ -10,7 +10,8 @@ namespace Suckless.Asserts
         {
             if (metadata.Value != null) 
             {
-                ThrowWhenEmpty(metadata.Value.Length, metadata.Name, message);
+                var count = metadata.Value.Length;
+                if (count == 0) throw ExceptionEmpty(count, metadata.Name, message);
             }
 
             return ref metadata;
@@ -22,7 +23,8 @@ namespace Suckless.Asserts
         {
             if (metadata.Value != null) 
             {
-                ThrowWhenEmpty(metadata.Value.Count(), metadata.Name, message);
+                var count = metadata.Value.Count();
+                if (count == 0) throw ExceptionEmpty(count, metadata.Name, message);
             }
 
             return ref metadata;
@@ -33,20 +35,18 @@ namespace Suckless.Asserts
         {
             if (metadata.Value != null) 
             {
-                ThrowWhenEmpty(metadata.Value.Length, metadata.Name, message);
+                var count = metadata.Value.Length;
+                if (count == 0) throw ExceptionEmpty(count, metadata.Name, message);
             }
 
             return ref metadata;
         }
 
-        private static void ThrowWhenEmpty(int count, string name , string message)
+        private static ArgumentOutOfRangeException ExceptionEmpty(int count, string name , string message)
         {
-            if (count == 0) 
-            {
-                throw new ArgumentOutOfRangeException(null, message == null 
-                    ? $"The {name} cannot be empty." 
-                    : message);
-            }
+            return new ArgumentOutOfRangeException(null, message == null 
+                ? $"The {name} cannot be empty." 
+                : message);
         }
     }
 }

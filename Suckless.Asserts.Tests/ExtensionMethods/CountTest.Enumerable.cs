@@ -39,7 +39,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
         }
 
         [Test]
-        public void Count_WhenCountIsNotExactAsExpectedNumber_ThrowsException()
+        public void Count_WhenCountIsNotExactAsExpectedNumber_ThrowsExceptionWithCorrectMessage()
         {
             var valueStub = Enumerable.Range(1, 5);
             var messagePart = "contains 5 item/s but should contain exact 10.";
@@ -49,7 +49,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
         }
 
         [Test]
-        public void Count_WhenCountIsNotBetweenExpectedNumbers_ThrowsException()
+        public void Count_WhenCountIsNotBetweenExpectedNumbers_ThrowsExceptionWithCorrectMessage()
         {
             var valueStub = Enumerable.Range(1, 6);
             var messagePart = "contains 6 item/s but should contain between 1 - 5.";

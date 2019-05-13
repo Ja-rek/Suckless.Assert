@@ -15,7 +15,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
         }
 
         [Test]
-        public void CountGreater_WhenStringIsNotGreaterThan2_ThrowsException()
+        public void CountGreater_WhenStringIsNotGreaterThan2_ThrowsExceptionWithCorrectMessage()
         {
             var valueStub = "1";
             var messagePart = "contains 1 character/s but should contain more than 2.";

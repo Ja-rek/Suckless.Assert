@@ -15,7 +15,7 @@ namespace Suckless.Asserts
 
             if (memberExpression.Expression is ConstantExpression)
             {
-                var value = (TValue)SelectValue(memberExpression, 
+                var value = (TValue)SelectValue(ref memberExpression, 
                     ((ConstantExpression)memberExpression.Expression).Value);
                 return new Metadata<TValue>(value, name);
             }
@@ -24,13 +24,13 @@ namespace Suckless.Asserts
             if (nestedMemberExpression == null) throw ApplicationException();
 
             if (!(nestedMemberExpression.Expression is ConstantExpression)) throw ApplicationException();
-            var obj = SelectValue(nestedMemberExpression, 
+            var obj = SelectValue(ref nestedMemberExpression, 
                 ((ConstantExpression)nestedMemberExpression.Expression).Value);
 
-            return new Metadata<TValue>((TValue)SelectValue(memberExpression, obj), name);
+            return new Metadata<TValue>((TValue)SelectValue(ref memberExpression, obj), name);
         }
 
-        private static object SelectValue(MemberExpression memberExpression, object obj)
+        private static object SelectValue(ref MemberExpression memberExpression, object obj)
         {
             return memberExpression.Member is FieldInfo
                 ? ((FieldInfo)memberExpression.Member).GetValue(obj)

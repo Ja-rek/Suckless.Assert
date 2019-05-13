@@ -31,7 +31,8 @@ namespace Suckless.Asserts
         {
             if (metadata.Value != null) 
             {
-                ThrowWhenCountIsNotGreater(metadata.Value.Count(), min, metadata.Name, message);
+                var count = metadata.Value.Count();
+                if (count < min) throw ExceptionCountIsNotGreater(count, min, metadata.Name, message);
             }
 
             return ref metadata;
@@ -44,20 +45,18 @@ namespace Suckless.Asserts
         {
             if (metadata.Value != null) 
             {
-                ThrowWhenCountIsNotGreater(metadata.Value.Length, min, metadata.Name, message);
+                var count = metadata.Value.Length;
+                if (count < min) throw ExceptionCountIsNotGreater(count, min, metadata.Name, message);
             }
 
             return ref metadata;
         }
 
-        private static void ThrowWhenCountIsNotGreater(int count, int min, string name , string message)
+        private static ArgumentOutOfRangeException ExceptionCountIsNotGreater(int count, int min, string name , string message)
         {
-            if (count < min) 
-            {
-                throw new ArgumentOutOfRangeException(null, message == null 
-                    ? $"The {name} contains {count} item/s but should contain more than {min}." 
-                    : message);
-            }
+            return new ArgumentOutOfRangeException(null, message == null 
+                ? $"The {name} contains {count} item/s but should contain more than {min}." 
+                : message);
         }
     }
 }

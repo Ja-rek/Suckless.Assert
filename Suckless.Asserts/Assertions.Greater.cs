@@ -10,7 +10,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value < min) 
             {
-                ThrowWhenNotGreater(metadata.Value.ToString(), min.ToString(), metadata.Name, message);
+                throw ExceptionNotGreater(metadata.Value.ToString(), min.ToString(), metadata.Name, message);
             }
 
             return ref metadata;
@@ -22,7 +22,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value < min) 
             {
-                ThrowWhenNotGreater(metadata.Value.ToString(), min.ToString(), metadata.Name, message);
+                throw ExceptionNotGreater(metadata.Value.ToString(), min.ToString(), metadata.Name, message);
             }
 
             return ref metadata;
@@ -34,7 +34,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value < min) 
             {
-                ThrowWhenNotGreater(metadata.Value.ToString(), min.ToString(), metadata.Name, message);
+                throw ExceptionNotGreater(metadata.Value.ToString(), min.ToString(), metadata.Name, message);
             }
 
             return ref metadata;
@@ -46,7 +46,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value < min) 
             {
-                ThrowWhenNotGreater(metadata.Value.ToString(), min.ToString(), metadata.Name, message);
+                throw ExceptionNotGreater(metadata.Value.ToString(), min.ToString(), metadata.Name, message);
             }
 
             return ref metadata;
@@ -58,7 +58,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value < min) 
             {
-                ThrowWhenNotGreater(metadata.Value.ToString(), min.ToString(), metadata.Name, message);
+                throw ExceptionNotGreater(metadata.Value.ToString(), min.ToString(), metadata.Name, message);
             }
 
             return ref metadata;
@@ -70,7 +70,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value < min) 
             {
-                ThrowWhenNotGreater(metadata.Value.ToString(), min.ToString(), metadata.Name, message);
+                throw ExceptionNotGreater(metadata.Value.ToString(), min.ToString(), metadata.Name, message);
             }
 
             return ref metadata;
@@ -82,7 +82,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value < min) 
             {
-                ThrowWhenNotGreater(metadata.Value.ToString(), min.ToString(), metadata.Name, message);
+                throw ExceptionNotGreater(metadata.Value.ToString(), min.ToString(), metadata.Name, message);
             }
 
             return ref metadata;
@@ -94,7 +94,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value < min) 
             {
-                ThrowWhenNotGreater(metadata.Value.ToString(), min.ToString(), metadata.Name, message);
+                throw ExceptionNotGreater(metadata.Value.ToString(), min.ToString(), metadata.Name, message);
             }
 
             return ref metadata;
@@ -106,15 +106,15 @@ namespace Suckless.Asserts
         {
             if (metadata.Value < min) 
             {
-                ThrowWhenNotGreater(metadata.Value.ToString(), min.ToString(), metadata.Name, message);
+                throw ExceptionNotGreater(metadata.Value.ToString(), min.ToString(), metadata.Name, message);
             }
 
             return ref metadata;
         }
 
-        private static void ThrowWhenNotGreater(string value, string min, string name , string message)
+        private static ArgumentOutOfRangeException ExceptionNotGreater(string value, string min, string name , string message)
         {
-            throw new ArgumentOutOfRangeException(null, message == null 
+            return new ArgumentOutOfRangeException(null, message == null 
                 ? $"The {name} contains the number {value} but should contain a number greater than {min}."
                 : message);
         }

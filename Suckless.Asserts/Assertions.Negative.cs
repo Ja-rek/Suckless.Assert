@@ -8,7 +8,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value > 0) 
             {
-                ThrowWhenNotNegative(metadata.Name , message);
+                throw ExceptionNotNegative(metadata.Name , message);
             }
 
             return ref metadata;
@@ -18,7 +18,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value > 0) 
             {
-                ThrowWhenNotNegative(metadata.Name , message);
+                throw ExceptionNotNegative(metadata.Name , message);
             }
 
             return ref metadata;
@@ -28,7 +28,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value > 0) 
             {
-                ThrowWhenNotNegative(metadata.Name , message);
+                throw ExceptionNotNegative(metadata.Name , message);
             }
 
             return ref metadata;
@@ -37,7 +37,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value > 0) 
             {
-                ThrowWhenNotNegative(metadata.Name , message);
+                throw ExceptionNotNegative(metadata.Name , message);
             }
 
             return ref metadata;
@@ -47,7 +47,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value > 0) 
             {
-                ThrowWhenNotNegative(metadata.Name , message);
+                throw ExceptionNotNegative(metadata.Name , message);
             }
 
             return ref metadata;
@@ -57,15 +57,15 @@ namespace Suckless.Asserts
         {
             if (metadata.Value > 0) 
             {
-                ThrowWhenNotNegative(metadata.Name , message);
+                throw ExceptionNotNegative(metadata.Name , message);
             }
 
             return ref metadata;
         }
 
-        private static void ThrowWhenNotNegative(string name , string message)
+        private static ArgumentException ExceptionNotNegative(string name , string message)
         {
-            throw new ArgumentException(message == null ? $"The {name} must be negative." : message);
+            return new ArgumentException(message == null ? $"The {name} must be negative." : message);
         }
     }
 }

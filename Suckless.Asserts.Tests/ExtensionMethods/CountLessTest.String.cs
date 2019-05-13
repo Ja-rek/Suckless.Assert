@@ -15,7 +15,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
         }
 
         [Test]
-        public void CountLess_WhenStringIsNotLessExpectedNumber_ThrowsException()
+        public void CountLess_WhenStringIsNotLessExpectedNumber_ThrowsExceptionWithCorrectMessage()
         {
             var valueStub = "123";
             var messagePart = "contains 3 character/s but should contain less than 2.";

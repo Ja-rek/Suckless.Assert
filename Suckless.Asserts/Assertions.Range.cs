@@ -11,7 +11,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value < min || metadata.Value > max) 
             {
-                ThrowWhenIsNotInRange(metadata.Value.ToString(), 
+                throw ExceptionNotInRange(metadata.Value.ToString(), 
                     min.ToString(), 
                     max.ToString(), 
                     metadata.Name, 
@@ -28,7 +28,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value < min || metadata.Value > max) 
             {
-                ThrowWhenIsNotInRange(metadata.Value.ToString(), 
+                throw ExceptionNotInRange(metadata.Value.ToString(), 
                     min.ToString(), 
                     max.ToString(), 
                     metadata.Name, 
@@ -46,7 +46,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value < min || metadata.Value > max) 
             {
-                ThrowWhenIsNotInRange(metadata.Value.ToString(), 
+                throw ExceptionNotInRange(metadata.Value.ToString(), 
                     min.ToString(), 
                     max.ToString(), 
                     metadata.Name, 
@@ -63,7 +63,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value < min || metadata.Value > max) 
             {
-                ThrowWhenIsNotInRange(metadata.Value.ToString(), 
+                throw ExceptionNotInRange(metadata.Value.ToString(), 
                     min.ToString(), 
                     max.ToString(), 
                     metadata.Name, 
@@ -80,7 +80,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value < min || metadata.Value > max) 
             {
-                ThrowWhenIsNotInRange(metadata.Value.ToString(), 
+                throw ExceptionNotInRange(metadata.Value.ToString(), 
                     min.ToString(), 
                     max.ToString(), 
                     metadata.Name, 
@@ -97,7 +97,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value < min || metadata.Value > max) 
             {
-                ThrowWhenIsNotInRange(metadata.Value.ToString(), 
+                throw ExceptionNotInRange(metadata.Value.ToString(), 
                     min.ToString(), 
                     max.ToString(), 
                     metadata.Name, 
@@ -114,7 +114,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value < min || metadata.Value > max) 
             {
-                ThrowWhenIsNotInRange(metadata.Value.ToString(), 
+                throw ExceptionNotInRange(metadata.Value.ToString(), 
                     min.ToString(), 
                     max.ToString(), 
                     metadata.Name, 
@@ -131,7 +131,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value < min || metadata.Value > max) 
             {
-                ThrowWhenIsNotInRange(metadata.Value.ToString(), 
+                throw ExceptionNotInRange(metadata.Value.ToString(), 
                     min.ToString(), 
                     max.ToString(), 
                     metadata.Name, 
@@ -148,7 +148,7 @@ namespace Suckless.Asserts
         {
             if (metadata.Value < min || metadata.Value > max) 
             {
-                ThrowWhenIsNotInRange(metadata.Value.ToString(), 
+                throw ExceptionNotInRange(metadata.Value.ToString(), 
                     min.ToString(), 
                     max.ToString(), 
                     metadata.Name, 
@@ -158,9 +158,9 @@ namespace Suckless.Asserts
             return ref metadata;
         }
 
-        private static void ThrowWhenIsNotInRange(string value, string min, string max, string name , string message)
+        private static ArgumentOutOfRangeException ExceptionNotInRange(string value, string min, string max, string name , string message)
         {
-            throw new ArgumentOutOfRangeException(null, message == null 
+            return new ArgumentOutOfRangeException(null, message == null 
                 ? $"The {name} contains the number {value} but should contain a number in range {min} - {max}." 
                 : message);
         }

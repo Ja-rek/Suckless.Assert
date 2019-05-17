@@ -1,6 +1,6 @@
 namespace Suckless.Asserts
 {
-    public readonly struct Metadata<TValue>
+    public readonly ref struct Metadata<TValue>
     {
         private readonly string name;
 
@@ -11,7 +11,7 @@ namespace Suckless.Asserts
         }
 
         public TValue Value { get; }
-        internal string Name => 
+        public string Name => 
             name == null ? $"value: {typeof(TValue).Name}" : $"{name}: {typeof(TValue).Name}";
     }
 }

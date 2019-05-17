@@ -9,37 +9,30 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
         [Test]
         public void Empty_WhenStringIsNull_DoNotThrowException()
         {
-            string valueStub = null;
-
-            Metadata(valueStub).Empty();
+            StubMetadata<string>(null).Empty();
         }
 
         [Test]
         public void Empty_WhenStringIsEmpty_DoNotThrowException()
         {
-            var valueStub = "";
-
-            Metadata(valueStub).Empty();
+            StubMetadata("").Empty();
         }
 
-        [Test]
-        public void Empty_WhenStringIsNotEmpty_ThrowsExceptionWithCorrectMessage()
+        [Test, TestCase(null), TestCase("AnyName")]
+        public void Empty_WhenStringIsNotEmpty_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
-            var valueStub = "Any";
-            var messagePart = "must be empty.";
+            var expectedMessagePart = "must be empty.";
 
-            AssertExceptionMessage(m => m.Empty(), valueStub, messagePart);
+            AssertExceptionMessage<string>(() => StubMetadata("Any", fieldName).Empty(), 
+                expecteddName: fieldName, 
+                expectedMessagePart);
         }
 
-        [Test]
-        public void Empty_WhenAssertionFailedAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage()
+        [Test, TestCase(null), TestCase("AnyName")]
+        public void Empty_WhenAssertionFailedAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
-            var valueStub = "Any";
-            var customeMessageStub = "Any message";
-
-            AssertCustomExceptionMessage(m => m.Empty(customeMessageStub), 
-                valueStub, 
-                customeMessageStub);
+            AssertCustomExceptionMessage(() => StubMetadata("Any", fieldName).Empty(CUSTOM_MESSAGE), 
+                expected: CUSTOM_MESSAGE);
         }
     }
 }

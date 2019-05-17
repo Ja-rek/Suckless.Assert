@@ -22,7 +22,8 @@ namespace Suckless.Asserts.Tests
             var actualMetadata = Assert(() => variable);
             var expectedMetadata = new Metadata<string>(variable, nameof(variable));
 
-            Unit.Assert.AreEqual(expectedMetadata, actualMetadata);
+            Unit.Assert.AreEqual(expectedMetadata.Value, actualMetadata.Value);
+            Unit.Assert.AreEqual(expectedMetadata.Name, actualMetadata.Name);
         }
 
         [Test]
@@ -31,7 +32,8 @@ namespace Suckless.Asserts.Tests
             var actualMetadata = Assert(() => this.variable);
             var expectedMetadata = new Metadata<string>(this.variable, nameof(this.variable));
 
-            Unit.Assert.AreEqual(expectedMetadata, actualMetadata);
+            Unit.Assert.AreEqual(expectedMetadata.Value, actualMetadata.Value);
+            Unit.Assert.AreEqual(expectedMetadata.Name, actualMetadata.Name);
         }
 
         [Test]
@@ -40,7 +42,8 @@ namespace Suckless.Asserts.Tests
             var actualMetadata = Assert(() => Property);
             var expectedMetadata = new Metadata<string>(Property, nameof(Property));
 
-            Unit.Assert.AreEqual(expectedMetadata, actualMetadata);
+            Unit.Assert.AreEqual(expectedMetadata.Value, actualMetadata.Value);
+            Unit.Assert.AreEqual(expectedMetadata.Name, actualMetadata.Name);
         }
 
         [Test]

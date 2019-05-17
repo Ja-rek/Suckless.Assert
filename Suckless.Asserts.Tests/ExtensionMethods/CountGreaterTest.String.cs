@@ -9,30 +9,24 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
         [Test]
         public void CountGreater_WhenStringIsGreaterThan1_DoNotThrowException()
         {
-            var valueStub = "12";
-
-            Metadata(valueStub).CountGreater(1);
+            StubMetadata("12").CountGreater(1);
         }
 
-        [Test]
-        public void CountGreater_WhenStringIsNotGreaterThan2_ThrowsExceptionWithCorrectMessage()
+        [Test, TestCase(null), TestCase("AnyName")]
+        public void CountGreater_WhenStringIsNotGreaterThanExpectedCount_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
-            var valueStub = "1";
-            var messagePart = "contains 1 character/s but should contain more than 2.";
+            var expectedMessagePart = "contains 1 character/s but should contain more than 2.";
 
-            AssertExceptionMessage(m => m.CountGreater(2), valueStub, messagePart);
+            AssertExceptionMessage<string>(() => StubMetadata("1", fieldName).CountGreater(2), 
+                expecteddName: fieldName, 
+                expectedMessagePart);
         }
 
-        [Test]
-        public void CountGreater_WhenStringIsNotGreaterThan2AdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage()
+        [Test, TestCase(null), TestCase("AnyName")]
+        public void CountGreater_WhenStringIsNotGreaterThan2AdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
-            var valueStub = "1";
-
-            var customeMessageStub = "Any message";
-
-            AssertCustomExceptionMessage(m => m.CountGreater(2, customeMessageStub), 
-                valueStub, 
-                customeMessageStub);
+            AssertCustomExceptionMessage(() => StubMetadata("1", fieldName).CountGreater(2, CUSTOM_MESSAGE), 
+                expected: CUSTOM_MESSAGE);
         }
     }
 }

@@ -9,29 +9,24 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
         [Test]
         public void True_WhenValueIsEqualToExpectedValue_DoNotThrowException()
         {
-            var valueStub = true;
-
-            Metadata(valueStub).True();
+            StubMetadata(true).True();
         }
 
-        [Test]
-        public void True_WhenValueIsNotEqualToExpectedValue_ThrowsExceptionWithCorrectMessage()
+        [Test, TestCase(null), TestCase("AnyName")]
+        public void True_WhenValueIsNotEqualToExpectedValue_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
-            var valueStub = false;
-            var messagePart = "must be true.";
+            var expectedMessagePart = "must be true.";
 
-            AssertExceptionMessage(m => m.True(), valueStub, messagePart);
+            AssertExceptionMessage<bool>(() => StubMetadata(false, fieldName).True(), 
+                expecteddName: fieldName,
+                expectedMessagePart);
         }
 
-        [Test]
-        public void True_WhenValueIsNotEqualToExpectedValueAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage()
+        [Test, TestCase(null), TestCase("AnyName")]
+        public void True_WhenValueIsNotEqualToExpectedValueAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
-            var valueStub = false;
-            var customeMessageStub = "Any message";
-
-            AssertCustomExceptionMessage(m => m.True(customeMessageStub), 
-                valueStub, 
-                customeMessageStub);
+            AssertCustomExceptionMessage(() => StubMetadata(false, fieldName).True(CUSTOM_MESSAGE), 
+                expected: CUSTOM_MESSAGE);
         }
     }
 }

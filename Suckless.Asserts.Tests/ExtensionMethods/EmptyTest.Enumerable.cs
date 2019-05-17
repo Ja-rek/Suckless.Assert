@@ -11,11 +11,8 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
         [Test]
         public void Empty_WhenEnumerableIsNull_DoNotThrowException()
         {
-            IEnumerable<int> enumerableStub = null;
-            int[] arrayStub = null;
-
-            Metadata(enumerableStub).Empty();
-            Metadata(arrayStub).Empty();
+            StubMetadata<IEnumerable<int>>(null).Empty();
+            StubMetadata<int[]>(null).Empty();
         }
 
         [Test]
@@ -23,33 +20,35 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
         {
             var valueStub = Enumerable.Empty<int>();
 
-            Metadata(valueStub).Empty();
-            Metadata(valueStub.ToArray()).Empty();
+            StubMetadata(valueStub).Empty();
+            StubMetadata(valueStub.ToArray()).Empty();
         }
 
-        [Test]
-        public void Empty_WhenEnumerableIsNotEmpty_ThrowsExceptionWithCorrectMessage()
+        [Test, TestCase(null), TestCase("AnyName")]
+        public void Empty_WhenEnumerableIsNotEmpty_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
-            var valueStub = Enumerable.Range(1, 2);
-            var messagePart = "must be empty.";
+            var value = Enumerable.Range(1, 2);
+            var expectedMessagePart = "must be empty.";
 
-            AssertExceptionMessage(m => m.Empty(), valueStub, messagePart);
-            AssertExceptionMessage(m => m.Empty(), valueStub.ToArray(), messagePart);
+            AssertExceptionMessage<IEnumerable<int>>(() => StubMetadata(value, fieldName).Empty(), 
+                expecteddName: fieldName, 
+                expectedMessagePart);
+
+            AssertExceptionMessage<int[]>(() => StubMetadata(value.ToArray(), fieldName).Empty(), 
+                expecteddName: fieldName, 
+                expectedMessagePart);
         }
 
-        [Test]
-        public void Empty_WhenAssertionFailedAdnCustomMessageWasSpecyfied__ThrowsExceptionWithCorrectMessage()
+        [Test, TestCase(null), TestCase("AnyName")]
+        public void Empty_WhenAssertionFailedAdnCustomMessageWasSpecyfied__ThrowsExceptionWithCorrectMessage(string fieldName)
         {
-            var valueStub = Enumerable.Range(1, 2);
-            var customeMessageStub = "Any message";
+            var value = Enumerable.Range(1, 2);
 
-            AssertCustomExceptionMessage(m => m.Empty(customeMessageStub), 
-                valueStub, 
-                customeMessageStub);
+            AssertCustomExceptionMessage(() => StubMetadata(value, fieldName).Empty(CUSTOM_MESSAGE), 
+                expected: CUSTOM_MESSAGE);
 
-            AssertCustomExceptionMessage(m => m.Empty(customeMessageStub), 
-                valueStub.ToArray(), 
-                customeMessageStub);
+            AssertCustomExceptionMessage(() => StubMetadata(value.ToArray(), fieldName).Empty(CUSTOM_MESSAGE), 
+                expected: CUSTOM_MESSAGE);
         }
     }
 }

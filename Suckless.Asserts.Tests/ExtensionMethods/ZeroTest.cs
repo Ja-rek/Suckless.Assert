@@ -9,42 +9,45 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
         [Test]
         public void Zero_WhenNumberIsZero_DoNotThrowException()
         {
-            var valueStub = 0;
-
-            Metadata((short)valueStub).Zero();
-            Metadata((int)valueStub).Zero();
-            Metadata((long)valueStub).Zero();
-            Metadata((decimal)valueStub).Zero();
-            Metadata((float)valueStub).Zero();
-            Metadata((double)valueStub).Zero();
+            foreach (var x in ZeroMethodByTypes(value: 0)) x.AssertZero.Invoke();
         }
 
-        [Test]
-        public void Zero_WhenNumberIsNotZero_ThrowsException()
+        [Test, TestCase(null), TestCase("AnyName")]
+        public void Zero_WhenNumberIsNotZero_ThrowsException(string fieldName)
         {
-            var valueStub = 1;
-            var messagePart = "must be zero.";
+            var expectedMessagePart = "must be zero.";
 
-            AssertExceptionMessage<short>(m => m.Zero(), valueStub, messagePart);
-            AssertExceptionMessage<int>(m => m.Zero(), valueStub, messagePart);
-            AssertExceptionMessage<long>(m => m.Zero(), valueStub, messagePart);
-            AssertExceptionMessage<decimal>(m => m.Zero(), valueStub, messagePart);
-            AssertExceptionMessage<float>(m => m.Zero(), valueStub, messagePart);
-            AssertExceptionMessage<double>(m => m.Zero(), valueStub, messagePart);
+            foreach (var x in ZeroMethodByTypes(value: 1, fieldName))
+            {
+                AssertExceptionMessage(() => x.AssertZero.Invoke(), 
+                    expectedType: x.Type, 
+                    expectedName: fieldName, 
+                    expectedMessagePart);
+            }
         }
 
-        [Test]
-        public void Zero_WhenNumberIsNotZeroAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage()
+        [Test, TestCase(null), TestCase("AnyName")]
+        public void Zero_WhenNumberIsNotZeroAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
-            var valueStub = 1;
-            var customeMessageStub = "Any message";
+            foreach (var x in ZeroMethodByTypes(value: 1, fieldName, CUSTOM_MESSAGE))
+            {
+                AssertCustomExceptionMessage(() => x.AssertZero.Invoke(), expected: CUSTOM_MESSAGE);
+            }
+        }
 
-            AssertCustomExceptionMessage<short>(m => m.Zero(customeMessageStub), valueStub, customeMessageStub);
-            AssertCustomExceptionMessage<int>(m => m.Zero(customeMessageStub), valueStub, customeMessageStub);
-            AssertCustomExceptionMessage<long>(m => m.Zero(customeMessageStub), valueStub, customeMessageStub);
-            AssertCustomExceptionMessage<decimal>(m => m.Zero(customeMessageStub), valueStub, customeMessageStub);
-            AssertCustomExceptionMessage<float>(m => m.Zero(customeMessageStub), valueStub, customeMessageStub);
-            AssertCustomExceptionMessage<decimal>(m => m.Zero(customeMessageStub), valueStub, customeMessageStub);
+        private (Type Type, Action AssertZero)[] ZeroMethodByTypes(int value, 
+            string fieldName = null, 
+            string message = null)
+        {
+            return new(Type, Action)[] 
+            {
+                ( typeof(short), () => StubMetadata((short)value, fieldName).Zero(message)),
+                ( typeof(int), () => StubMetadata((int)value, fieldName).Zero(message)),
+                ( typeof(long), () => StubMetadata((long)value, fieldName).Zero(message)),
+                ( typeof(decimal), () => StubMetadata((decimal)value, fieldName).Zero(message)),
+                ( typeof(double), () => StubMetadata((double)value, fieldName).Zero(message)),
+                ( typeof(float), () => StubMetadata((float)value, fieldName).Zero(message)),
+            };
         }
     }
 }

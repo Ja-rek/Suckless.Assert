@@ -10,55 +10,54 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
         [Test]
         public void Count_WhenAllowNullAndStringIsNull_DoNotThrowException()
         {
-            string valueStub = null;
-
-            Metadata(valueStub).Count(1);
+            StubMetadata<string>(null).Count(1);
         }
 
         [Test]
         public void Count_WhenCountIsExactAsExpedtedNumber_DoNotThrowException()
         {
-            string valueStub = "123";
-
-            Metadata(valueStub).Count(3);
+            StubMetadata("123").Count(3);
         }
 
         [Test]
         public void Count_WhenCountIsBetweenExpectedCharacters_DoNotThrowException()
         {
-            string valueStub = "12345";
-
-            Metadata(valueStub).Count(1, 5);
+            StubMetadata("12345").Count(1, 5);
         }
 
-        [Test]
-        public void Count_WhenCountIsNotAsExpecptedNumber_ThrowsExceptionWithCorrectMessage()
+        [Test, TestCase(null), TestCase("AnyName")]
+        public void Count_WhenCountIsNotAsExpecptedNumber_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
-            string valueStub = "123";
-            var messagePart = "contains 3 character/s but should contain exact 5.";
+            string value = "123";
+            var expectedMessagePart = "contains 3 character/s but should contain exact 5.";
 
-            AssertExceptionMessage(m => m.Count(5), valueStub, messagePart);
+            AssertExceptionMessage<string>(() => StubMetadata(value, fieldName).Count(5), 
+                expecteddName: fieldName, 
+                expectedMessagePart);
         }
 
-        [Test]
-        [TestCase("123456")]
-        [TestCase("12")]
-        public void Count_WhenCountIsNotBetweenExpectedCharacters_ThrowsException(string valueStub)
+        [Test] 
+        [TestCase(null, "12"), 
+        TestCase(null, "121232"), 
+        TestCase("AnyName", "12"), 
+        TestCase("AnyName", "1212121")]
+        public void Count_WhenCountIsNotBetweenExpectedCharacters_ThrowsException(string fieldName, string value)
         {
-            var messagePart = $"contains {valueStub.Count()} character/s but should contain between 3 - 4.";
+            var expectedMessagePart = $"contains {value.Count()} character/s but should contain between 3 - 4.";
 
-            AssertExceptionMessage(m => m.Count(3, 4), valueStub, messagePart);
+            AssertExceptionMessage<string>(() => StubMetadata(value, fieldName).Count(3, 4), 
+                expecteddName: fieldName, 
+                expectedMessagePart);
         }
 
-        [Test]
-        public void CountCharacters_WhenAssertionFailedAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage()
+        [TestCase(null, "12"), 
+        TestCase(null, "121232"), 
+        TestCase("AnyName", "12"), 
+        TestCase("AnyName", "1212121")]
+        public void CountCharacters_WhenAssertionFailedAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage(string fieldName, string value)
         {
-            string valueStub = "12";
-            var customMessageStub = "Any message";
-
-            AssertCustomExceptionMessage(m => m.Count(3, 5, customMessageStub), 
-                valueStub, 
-                customMessageStub);
+            AssertCustomExceptionMessage(() => StubMetadata(value, fieldName).Count(3, 5, CUSTOM_MESSAGE), 
+                expected: CUSTOM_MESSAGE);
         }
     }
 }

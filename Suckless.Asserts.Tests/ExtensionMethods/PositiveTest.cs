@@ -9,42 +9,47 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
         [Test]
         public void Positive_WhenNumberIsPositive_DoNotThrowException()
         {
-            var valueStub = 1;
-
-            Metadata((short)valueStub).Positive();
-            Metadata((int)valueStub).Positive();
-            Metadata((long)valueStub).Positive();
-            Metadata((decimal)valueStub).Positive();
-            Metadata((float)valueStub).Positive();
-            Metadata((double)valueStub).Positive();
+            foreach (var x in PositiveMethodByTypes(value: 1)) x.PositiveMethod.Invoke();
         }
 
-        [Test]
-        public void Positive_WhenNumberIsNotPositive_ThrowsException()
+        [Test, TestCase(null), TestCase("AnyName")]
+        public void Positive_WhenNumberIsNotPositive_ThrowsException(string fieldName)
         {
-            var valueStub = -1;
-            var messagePart = "must be positive.";
+            var expectedMessagePart = "must be positive.";
 
-            AssertExceptionMessage<short>(m => m.Positive(), valueStub, messagePart);
-            AssertExceptionMessage<int>(m => m.Positive(), valueStub, messagePart);
-            AssertExceptionMessage<long>(m => m.Positive(), valueStub, messagePart);
-            AssertExceptionMessage<decimal>(m => m.Positive(), valueStub, messagePart);
-            AssertExceptionMessage<float>(m => m.Positive(), valueStub, messagePart);
-            AssertExceptionMessage<double>(m => m.Positive(), valueStub, messagePart);
+            foreach (var x in PositiveMethodByTypes(value: -1, fieldName))
+            {
+                AssertExceptionMessage(() => x.PositiveMethod.Invoke(), 
+                    expectedType: x.Type, 
+                    expectedName: fieldName, 
+                    expectedMessagePart);
+            }
         }
 
-        [Test]
-        public void Positive_WhenNumberIsNotPositiveAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage()
+        [Test, TestCase(null), TestCase("AnyName")]
+        public void Positive_WhenNumberIsNotPositiveAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
-            var valueStub = -1;
-            var customeMessageStub = "Any message";
+            var customMessage = "Any message";
 
-            AssertCustomExceptionMessage<short>(m => m.Positive(customeMessageStub), valueStub, customeMessageStub);
-            AssertCustomExceptionMessage<int>(m => m.Positive(customeMessageStub), valueStub, customeMessageStub);
-            AssertCustomExceptionMessage<long>(m => m.Positive(customeMessageStub), valueStub, customeMessageStub);
-            AssertCustomExceptionMessage<decimal>(m => m.Positive(customeMessageStub), valueStub, customeMessageStub);
-            AssertCustomExceptionMessage<float>(m => m.Positive(customeMessageStub), valueStub, customeMessageStub);
-            AssertCustomExceptionMessage<decimal>(m => m.Positive(customeMessageStub), valueStub, customeMessageStub);
+            foreach (var x in PositiveMethodByTypes(value: -1, fieldName, customMessage))
+            {
+                AssertCustomExceptionMessage(() => x.PositiveMethod.Invoke(), expected: customMessage);
+            }
+        }
+
+        private (Type Type, Action PositiveMethod)[] PositiveMethodByTypes(int value, 
+            string fieldName = null, 
+            string message = null)
+        {
+            return new(Type, Action)[] 
+            {
+                ( typeof(short), () => StubMetadata((short)value, fieldName).Positive(message)),
+                ( typeof(int), () => StubMetadata((int)value, fieldName).Positive(message)),
+                ( typeof(long), () => StubMetadata((long)value, fieldName).Positive(message)),
+                ( typeof(decimal), () => StubMetadata((decimal)value, fieldName).Positive(message)),
+                ( typeof(double), () => StubMetadata((double)value, fieldName).Positive(message)),
+                ( typeof(float), () => StubMetadata((float)value, fieldName).Positive(message)),
+            };
         }
     }
 }

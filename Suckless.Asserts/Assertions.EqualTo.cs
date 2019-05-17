@@ -4,7 +4,7 @@ namespace Suckless.Asserts
 {
     public static partial class Assertions
     {
-        public static ref readonly Metadata<TValue> Equal<TValue>(in this Metadata<TValue> metadata, 
+        public static ref readonly Metadata<TValue> EqualTo<TValue>(in this Metadata<TValue> metadata, 
             object obj, 
             string message = null)
         {

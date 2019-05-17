@@ -11,74 +11,83 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
         [Test]
         public void Count_WhenEnumerableIsNull_DoNotThrowException()
         {
-            IEnumerable<int> enumerableStub = null;
-            int[] arrayStub = null;
+            IEnumerable<int> enumerable = null;
+            int[] array = null;
 
-            Metadata(enumerableStub).Count(2);
-            Metadata(arrayStub).Count(2);
-            Metadata(enumerableStub).Count(2, 3);
-            Metadata(arrayStub).Count(2, 3);
+            StubMetadata(enumerable).Count(2);
+            StubMetadata(array).Count(2);
+            StubMetadata(enumerable).Count(2, 3);
+            StubMetadata(array).Count(2, 3);
         }
 
         [Test]
         public void Count_WhenCountIsExactAsExpectedNumber_DoNotThrowException()
         {
-            var valueStub = Enumerable.Range(1, 3);
+            var value = Enumerable.Range(1, 3);
 
-            Metadata(valueStub).Count(3);
-            Metadata(valueStub.ToArray()).Count(3);
+            StubMetadata(value).Count(3);
+            StubMetadata(value.ToArray()).Count(3);
         }
 
         [Test]
         public void Count_WhenCountIsBetweenExpectedNumbers_DoNotThrowException()
         {
-            var valueStub = Enumerable.Range(1, 3);
+            var value = Enumerable.Range(1, 3);
 
-            Metadata(valueStub).Count(2, 3);
-            Metadata(valueStub.ToArray()).Count(2, 3);
+            StubMetadata(value).Count(2, 3);
+            StubMetadata(value.ToArray()).Count(2, 3);
         }
 
         [Test]
-        public void Count_WhenCountIsNotExactAsExpectedNumber_ThrowsExceptionWithCorrectMessage()
+        [TestCase(null), TestCase("AnyName")]
+        public void Count_WhenCountIsNotExactAsExpectedNumber_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
-            var valueStub = Enumerable.Range(1, 5);
-            var messagePart = "contains 5 item/s but should contain exact 10.";
+            var value = Enumerable.Range(1, 5);
+            var expectedMessagePart = "contains 5 item/s but should contain exact 10.";
 
-            AssertExceptionMessage(m => m.Count(10), valueStub, messagePart);
-            AssertExceptionMessage(m => m.Count(10), valueStub.ToArray(), messagePart);
+            AssertExceptionMessage<IEnumerable<int>>(() => StubMetadata(value, fieldName).Count(10), 
+                expecteddName: fieldName, 
+                expectedMessagePart);
+
+            AssertExceptionMessage<int[]>(() => StubMetadata(value.ToArray(), fieldName).Count(10), 
+                expecteddName: fieldName, 
+                expectedMessagePart);
         }
 
-        [Test]
-        public void Count_WhenCountIsNotBetweenExpectedNumbers_ThrowsExceptionWithCorrectMessage()
+        [Test] 
+        [TestCase(null, new int[] { 1, 2 }), 
+        TestCase(null, new int[] { 1, 2, 3, 4, 5 }), 
+        TestCase("AnyName", new int[] { 1, 2 }),
+        TestCase("AnyName", new int[] { 1, 2, 3, 4, 5 })]
+        public void Count_WhenCountIsNotBetweenExpectedNumbers_ThrowsExceptionWithCorrectMessage(string fieldName, IEnumerable<int> value)
         {
-            var valueStub = Enumerable.Range(1, 6);
-            var messagePart = "contains 6 item/s but should contain between 1 - 5.";
+            var expectedMessagePart = $"contains {value.Count()} item/s but should contain between 3 - 4.";
 
-            AssertExceptionMessage(m => m.Count(1, 5), valueStub, messagePart);
-            AssertExceptionMessage(m => m.Count(1, 5), valueStub.ToArray(), messagePart);
+            AssertExceptionMessage<IEnumerable<int>>(() => StubMetadata(value, fieldName).Count(3, 4), 
+                expecteddName: fieldName, 
+                expectedMessagePart);
+
+            AssertExceptionMessage<int[]>(() => StubMetadata(value.ToArray(), fieldName).Count(3, 4), 
+                expecteddName: fieldName, 
+                expectedMessagePart);
         }
 
-        [Test]
-        public void Count_WhenAssertionFailedAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage()
+        [Test, TestCase(null), TestCase("AnyName")]
+        public void Count_WhenAssertionFailedAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage(string fiedName)
         {
-            var valueStub = Enumerable.Range(1, 5);
-            var customMessageStub = "Any message";
+            var value = Enumerable.Range(1, 5);
 
-            AssertCustomExceptionMessage(m => m.Count(6, 7, customMessageStub), 
-                valueStub, 
-                customMessageStub);
+            AssertCustomExceptionMessage(() => StubMetadata(value, fiedName).Count(6, 7, CUSTOM_MESSAGE), 
+                expected: CUSTOM_MESSAGE);
 
-            AssertCustomExceptionMessage(m => m.Count(6, 7, customMessageStub), 
-                valueStub.ToArray(), 
-                customMessageStub);
+            AssertCustomExceptionMessage(() => StubMetadata(value.ToArray(), fiedName).Count(6, 7, CUSTOM_MESSAGE), 
+                expected: CUSTOM_MESSAGE);
 
-            AssertCustomExceptionMessage(m => m.Count(6, customMessageStub),
-                valueStub, 
-                customMessageStub);
+            AssertCustomExceptionMessage(() => StubMetadata(value, fiedName).Count(6, CUSTOM_MESSAGE), 
+                expected: CUSTOM_MESSAGE);
 
-            AssertCustomExceptionMessage(m => m.Count(6, customMessageStub),
-                valueStub.ToArray(), 
-                customMessageStub);
+            AssertCustomExceptionMessage(() => StubMetadata(value.ToArray(), fiedName).Count(6, CUSTOM_MESSAGE), 
+                expected: CUSTOM_MESSAGE);
         }
     }
 }

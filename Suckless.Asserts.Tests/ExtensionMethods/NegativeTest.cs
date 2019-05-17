@@ -9,42 +9,45 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
         [Test]
         public void Negative_WhenNumberIsNegative_DoNotThrowException()
         {
-            var valueStub = -1;
-
-            Metadata((short)valueStub).Negative();
-            Metadata((int)valueStub).Negative();
-            Metadata((long)valueStub).Negative();
-            Metadata((decimal)valueStub).Negative();
-            Metadata((float)valueStub).Negative();
-            Metadata((double)valueStub).Negative();
+            foreach (var x in NegativeMethodByTypes(value: -1)) x.AssertNegative.Invoke();
         }
 
-        [Test]
-        public void Negative_WhenNumberIsNotNegative_ThrowsException()
+        [Test, TestCase(null), TestCase("AnyName")]
+        public void Negative_WhenNumberIsNotNegative_ThrowsException(string fieldName)
         {
-            var valueStub = 1;
-            var messagePart = "must be negative.";
+            var expectedMessagePart = "must be negative.";
 
-            AssertExceptionMessage<short>(m => m.Negative(), valueStub, messagePart);
-            AssertExceptionMessage<int>(m => m.Negative(), valueStub, messagePart);
-            AssertExceptionMessage<long>(m => m.Negative(), valueStub, messagePart);
-            AssertExceptionMessage<decimal>(m => m.Negative(), valueStub, messagePart);
-            AssertExceptionMessage<float>(m => m.Negative(), valueStub, messagePart);
-            AssertExceptionMessage<double>(m => m.Negative(), valueStub, messagePart);
+            foreach (var x in NegativeMethodByTypes(value: 1, fieldName))
+            {
+                AssertExceptionMessage(() => x.AssertNegative.Invoke(), 
+                    expectedType: x.Type, 
+                    expectedName: fieldName, 
+                    expectedMessagePart);
+            }
         }
 
-        [Test]
-        public void Negative_WhenNumberIsNotNegativeAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage()
+        [Test, TestCase(null), TestCase("AnyName")]
+        public void Negative_WhenNumberIsNotNegativeAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
-            var valueStub = 1;
-            var customeMessageStub = "Any message";
+            foreach (var x in NegativeMethodByTypes(value: 1, fieldName, CUSTOM_MESSAGE))
+            {
+                AssertCustomExceptionMessage(() => x.AssertNegative.Invoke(), expected: CUSTOM_MESSAGE);
+            }
+        }
 
-            AssertCustomExceptionMessage<short>(m => m.Negative(customeMessageStub), valueStub, customeMessageStub);
-            AssertCustomExceptionMessage<int>(m => m.Negative(customeMessageStub), valueStub, customeMessageStub);
-            AssertCustomExceptionMessage<long>(m => m.Negative(customeMessageStub), valueStub, customeMessageStub);
-            AssertCustomExceptionMessage<decimal>(m => m.Negative(customeMessageStub), valueStub, customeMessageStub);
-            AssertCustomExceptionMessage<float>(m => m.Negative(customeMessageStub), valueStub, customeMessageStub);
-            AssertCustomExceptionMessage<decimal>(m => m.Negative(customeMessageStub), valueStub, customeMessageStub);
+        private (Type Type, Action AssertNegative)[] NegativeMethodByTypes(int value, 
+            string fieldName = null, 
+            string message = null)
+        {
+            return new(Type, Action)[] 
+            {
+                ( typeof(short), () => StubMetadata((short)value, fieldName).Negative(message)),
+                ( typeof(int), () => StubMetadata((int)value, fieldName).Negative(message)),
+                ( typeof(long), () => StubMetadata((long)value, fieldName).Negative(message)),
+                ( typeof(decimal), () => StubMetadata((decimal)value, fieldName).Negative(message)),
+                ( typeof(double), () => StubMetadata((double)value, fieldName).Negative(message)),
+                ( typeof(float), () => StubMetadata((float)value, fieldName).Negative(message)),
+            };
         }
     }
 }

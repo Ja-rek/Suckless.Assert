@@ -9,69 +9,52 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
         [Test]
         public void Greater_WhenNumberIsGreaterThanExpectedNumber_DoNotThrowException()
         {
-            var valueStub = 2;
-
-            Metadata((short)valueStub).Greater((short)1);
-            Metadata((ushort)valueStub).Greater((ushort)1);
-            Metadata((int)valueStub).Greater((int)1);
-            Metadata((uint)valueStub).Greater((uint)1);
-            Metadata((long)valueStub).Greater((long)1);
-            Metadata((ulong)valueStub).Greater((ulong)1);
-            Metadata((decimal)valueStub).Greater((decimal)1);
-            Metadata((float)valueStub).Greater((float)1);
-            Metadata((double)valueStub).Greater((double)1);
+            foreach (var x in GreaterMethodByTypes(min: 1, value: 2))
+            {
+                x.AssertGreater.Invoke();
+            }
         }
 
-        [Test]
-        public void Greater_WhenNumberIsNotGreaterThanExpectedNumber_ThrowsExceptionWithCorrectMessage()
+        [Test, TestCase(null), TestCase("AnyName")]
+        public void Greater_WhenNumberIsNotGreaterThanExpectedNumber_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
-            var valueStub = 1;
-            var messagePart = $"contains the number {valueStub} but should contain a number greater than 2.";
+            var expectedMessagePart = $"contains the number 1 but should contain a number greater than 2.";
 
-            AssertExceptionMessage<short>(m => m.Greater((short)2), valueStub, messagePart);
-            AssertExceptionMessage<ushort>(m => m.Greater((ushort)2), valueStub, messagePart);
-            AssertExceptionMessage<int>(m => m.Greater((int)2), valueStub, messagePart);
-            AssertExceptionMessage<uint>(m => m.Greater((uint)2), valueStub, messagePart);
-            AssertExceptionMessage<long>(m => m.Greater((long)2), valueStub, messagePart);
-            AssertExceptionMessage<ulong>(m => m.Greater((ulong)2), valueStub, messagePart);
-            AssertExceptionMessage<decimal>(m => m.Greater((decimal)2), valueStub, messagePart);
-            AssertExceptionMessage<float>(m => m.Greater((float)2), valueStub, messagePart);
-            AssertExceptionMessage<double>(m => m.Greater((double)2), valueStub, messagePart);
+            foreach (var x in GreaterMethodByTypes(min: 2, value: 1, fieldName))
+            {
+                AssertExceptionMessage(() => x.AssertGreater.Invoke(), 
+                    expectedType: x.Type, 
+                    expectedName: fieldName, 
+                    expectedMessagePart);
+            }
         }
 
-        [Test]
-        public void Greater_WhenAssertionFailedAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage()
+        [Test, TestCase(null), TestCase("AnyName")]
+        public void Greater_WhenAssertionFailedAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
-            var valueStub = 1;
-            var customeMessageStub = "Any message";
+            foreach (var x in GreaterMethodByTypes(min: 2, value: 1, fieldName, CUSTOM_MESSAGE))
+            {
+                AssertCustomExceptionMessage(() => x.AssertGreater.Invoke(), expected: CUSTOM_MESSAGE);
+            }
+        }
 
-            AssertCustomExceptionMessage<short>(m => m.Greater((short)2, customeMessageStub), 
-                valueStub, 
-                customeMessageStub);
-            AssertCustomExceptionMessage<ushort>(m => m.Greater((ushort)2, customeMessageStub), 
-                valueStub, 
-                customeMessageStub);
-            AssertCustomExceptionMessage<int>(m => m.Greater((int)2, customeMessageStub), 
-                valueStub, 
-                customeMessageStub);
-            AssertCustomExceptionMessage<uint>(m => m.Greater((uint)2, customeMessageStub), 
-                valueStub, 
-                customeMessageStub);
-            AssertCustomExceptionMessage<long>(m => m.Greater((long)2, customeMessageStub), 
-                valueStub, 
-                customeMessageStub);
-            AssertCustomExceptionMessage<ulong>(m => m.Greater((ulong)2, customeMessageStub), 
-                valueStub, 
-                customeMessageStub);
-            AssertCustomExceptionMessage<decimal>(m => m.Greater((decimal)2, customeMessageStub), 
-                valueStub, 
-                customeMessageStub);
-            AssertCustomExceptionMessage<float>(m => m.Greater((float)2, customeMessageStub), 
-                valueStub, 
-                customeMessageStub);
-            AssertCustomExceptionMessage<double>(m => m.Greater((double)2, customeMessageStub), 
-                valueStub, 
-                customeMessageStub);
+        private (Type Type, Action AssertGreater)[] GreaterMethodByTypes(int min, 
+            int value, 
+            string fieldName = null, 
+            string message = null)
+        {
+            return new(Type, Action)[] 
+            {
+                ( typeof(short), () => StubMetadata((short)value, fieldName).Greater((short)min, message)),
+                ( typeof(ushort), () => StubMetadata((ushort)value, fieldName).Greater((ushort)min, message)),
+                ( typeof(int), () => StubMetadata((int)value, fieldName).Greater((int)min, message)),
+                ( typeof(uint), () => StubMetadata((uint)value, fieldName).Greater((uint)min, message)),
+                ( typeof(long), () => StubMetadata((long)value, fieldName).Greater((long)min, message)),
+                ( typeof(ulong), () => StubMetadata((ulong)value, fieldName).Greater((ulong)min, message)),
+                ( typeof(decimal), () => StubMetadata((decimal)value, fieldName).Greater((decimal)min, message)),
+                ( typeof(double), () => StubMetadata((double)value, fieldName).Greater((double)min, message)),
+                ( typeof(float), () => StubMetadata((float)value, fieldName).Greater((float)min, message)),
+            };
         }
     }
 }

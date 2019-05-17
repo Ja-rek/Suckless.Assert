@@ -7,32 +7,32 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
     internal partial class CountLessTest : AssertBaseTest<ArgumentOutOfRangeException> 
     {
         [Test]
-        public void CountLess_WhenStringIsLessExpectedNumber_DoNotThrowException()
+        public void CountLess_WhenStringIsNull_DoNotThrowException()
         {
-            var valueStub = "12";
-
-            Metadata(valueStub).CountLess(3);
+            StubMetadata<string>(null).CountLess(2);
         }
 
         [Test]
-        public void CountLess_WhenStringIsNotLessExpectedNumber_ThrowsExceptionWithCorrectMessage()
+        public void CountLess_WhenStringIsLessThanExpectedCharacters_DoNotThrowException()
         {
-            var valueStub = "123";
-            var messagePart = "contains 3 character/s but should contain less than 2.";
-
-            AssertExceptionMessage(m => m.CountLess(2), valueStub, messagePart);
+            StubMetadata("1").CountLess(2);
         }
 
-        [Test]
-        public void CountLess_WhenStringIsNotLessExpectedNumberAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage()
+        [Test, TestCase(null), TestCase("AnyName")]
+        public void CountLess_WhenStringIsNotLessThanExpectedCharacters_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
-            var valueStub = "123";
+            var expectedMessagePart = "contains 2 character/s but should contain less than 1.";
 
-            var customeMessageStub = "Any message";
+            AssertExceptionMessage<string>(() => StubMetadata("12", fieldName).CountLess(1), 
+                expecteddName: fieldName, 
+                expectedMessagePart);
+        }
 
-            AssertCustomExceptionMessage(m => m.CountLess(2, customeMessageStub), 
-                valueStub, 
-                customeMessageStub);
+        [Test, TestCase(null), TestCase("AnyName")]
+        public void CountLess_WhenStringIsNotLessThanExpectedCharactersAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage(string fieldName)
+        {
+            AssertCustomExceptionMessage(() => StubMetadata("12", fieldName).CountLess(1, CUSTOM_MESSAGE), 
+                expected: CUSTOM_MESSAGE);
         }
     }
 }

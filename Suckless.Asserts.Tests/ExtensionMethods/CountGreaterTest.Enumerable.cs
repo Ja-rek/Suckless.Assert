@@ -8,47 +8,44 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
 {
     internal partial class CountGreaterTest : AssertBaseTest<ArgumentOutOfRangeException>
     {
+        private IEnumerable<int> value = Enumerable.Range(1, 5);
+
         [Test]
         public void CountGreater_WhenEnumerableIsNull_DoNotThrowException()
         {
-            IEnumerable<int> enumerableStub = null;
-            int[] arrayStub = null;
-
-            Metadata(enumerableStub).CountGreater(2);
-            Metadata(arrayStub).CountGreater(2);
+            StubMetadata<IEnumerable<int>>(null).CountGreater(2);
+            StubMetadata<int[]>(null).CountGreater(2);
         }
 
         [Test]
         public void CountGreater_WhenCountOfEnumerableIsGreater_DoNotThrowException()
         {
-            var valueStub = Enumerable.Range(1, 5);
-
-            Metadata(valueStub).CountGreater(3);
-            Metadata(valueStub.ToArray()).CountGreater(3);
+            StubMetadata(value).CountGreater(3);
+            StubMetadata(value.ToArray()).CountGreater(3);
         }
 
-        [Test]
-        public void CountGreater_WhenCountOfEnumerableIsNotGreater_ThrowsExceptionWithCorrectMessage()
+        [Test, TestCase(null), TestCase("AnyName")]
+        public void CountGreater_WhenCountOfEnumerableIsNotGreater_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
-            var valueStub = Enumerable.Range(1, 5);
-            var messagePart = "contains 5 item/s but should contain more than 10.";
+            var expectedMessagePart = "contains 5 item/s but should contain more than 10.";
 
-            AssertExceptionMessage(m => m.CountGreater(10), valueStub, messagePart);
+            AssertExceptionMessage<IEnumerable<int>>(() => StubMetadata(value, fieldName).CountGreater(10), 
+                expecteddName: fieldName, 
+                expectedMessagePart);
+
+            AssertExceptionMessage<int[]>(() => StubMetadata(value.ToArray(), fieldName).CountGreater(10), 
+                expecteddName: fieldName, 
+                expectedMessagePart);
         }
 
-        [Test]
-        public void CountGreater_WhenCountOfEnumerableIsNotGreaterAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage()
+        [Test, TestCase(null), TestCase("AnyName")]
+        public void CountGreater_WhenCountOfEnumerableIsNotGreaterAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
-            var valueStub = Enumerable.Range(1, 5);
-            var customeMessageStub = "Any message";
+            AssertCustomExceptionMessage(() => StubMetadata(value, fieldName).CountGreater(10, CUSTOM_MESSAGE), 
+                expected: CUSTOM_MESSAGE);
 
-            AssertCustomExceptionMessage(m => m.CountGreater(10, customeMessageStub), 
-                valueStub, 
-                customeMessageStub);
-
-            AssertCustomExceptionMessage(m => m.CountGreater(10, customeMessageStub), 
-                valueStub.ToArray(), 
-                customeMessageStub);
+            AssertCustomExceptionMessage(() => StubMetadata(value.ToArray(), fieldName).CountGreater(10, CUSTOM_MESSAGE), 
+                expected: CUSTOM_MESSAGE);
         }
     }
 }

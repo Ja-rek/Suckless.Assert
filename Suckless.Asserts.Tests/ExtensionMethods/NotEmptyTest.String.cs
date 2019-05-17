@@ -1,46 +1,40 @@
-using Unit = NUnit.Framework;
 using System;
 using NUnit.Framework;
 using Suckless.Asserts.Tests.Base;
 
 namespace Suckless.Asserts.Tests.ExtensionMethods
 {
-    internal partial class AssertNotEmptyTest : AssertBaseTest<ArgumentOutOfRangeException> 
+    internal partial class NotEmptyTest : AssertBaseTest<ArgumentOutOfRangeException> 
     {
         [Test]
         public void NotEmpty_WhenAllowNullAndStringIsNull_DoNotThrowException()
         {
-            string valueStub = null;
-
-            Metadata(valueStub).NotEmpty();
+            StubMetadata<string>(null).NotEmpty();
         }
 
         [Test]
         public void NotEmpty_WhenStringIsNotEmpty_DoNotThrowException()
         {
-            var valueStub = "Any";
-
-            Metadata(valueStub).NotEmpty();
+            StubMetadata("Any").NotEmpty();
         }
 
-        [Test]
-        public void NotEmpty_WhenStringIsEmpty_ThrowsException()
+        [Test, TestCase(null), TestCase("AnyName")]
+        public void NotEmpty_WhenStringIsEmpty_ThrowsException(string fieldName)
         {
-            var valueStub = "";
-            var messagePart = "cannot be empty.";
+            var expectedMessagePart = "cannot be empty.";
 
-            AssertExceptionMessage(m => m.NotEmpty(), valueStub, messagePart);
+            AssertExceptionMessage<string>(() => StubMetadata("", fieldName).NotEmpty(), 
+                expecteddName: fieldName, 
+                expectedMessagePart);
         }
 
-        [Test]
-        public void NotEmpty_WhenStringIsEmptyAndSpecifiedCustomeMessage_ThrowsExceptionWithCorrectMessage()
+        [Test, TestCase(null), TestCase("AnyName")]
+        public void NotEmpty_WhenStringIsEmptyAndSpecifiedCustomeMessage_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
-            var valueStub = "";
-            var customeMessageStub = "Any message";
+            var customeMessage = "Any message";
 
-            AssertCustomExceptionMessage(m => m.NotEmpty(customeMessageStub), 
-                valueStub, 
-                customeMessageStub);
+            AssertCustomExceptionMessage(() => StubMetadata("", fieldName).NotEmpty(customeMessage), 
+                expected: customeMessage);
         }
     }
 }

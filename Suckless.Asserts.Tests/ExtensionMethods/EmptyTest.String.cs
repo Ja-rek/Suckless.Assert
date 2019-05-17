@@ -18,7 +18,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
             StubMetadata("").Empty();
         }
 
-        [Test, TestCase(null), TestCase("AnyName")]
+        [TestCase(null), TestCase("AnyName")]
         public void Empty_WhenStringIsNotEmpty_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
             var expectedMessagePart = "must be empty.";
@@ -28,7 +28,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
                 expectedMessagePart);
         }
 
-        [Test, TestCase(null), TestCase("AnyName")]
+        [TestCase(null), TestCase("AnyName")]
         public void Empty_WhenAssertionFailedAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
             AssertCustomExceptionMessage(() => StubMetadata("Any", fieldName).Empty(CUSTOM_MESSAGE), 

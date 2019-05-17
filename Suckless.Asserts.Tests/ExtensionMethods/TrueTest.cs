@@ -22,7 +22,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
                 expectedMessagePart);
         }
 
-        [Test, TestCase(null), TestCase("AnyName")]
+        [TestCase(null), TestCase("AnyName")]
         public void True_WhenValueIsNotEqualToExpectedValueAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
             AssertCustomExceptionMessage(() => StubMetadata(false, fieldName).True(CUSTOM_MESSAGE), 

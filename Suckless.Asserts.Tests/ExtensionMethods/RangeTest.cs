@@ -13,7 +13,6 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
             foreach (var x in RangeMethodByTypes(min: 4, max: 6, value: 5)) x.AssertRange.Invoke();
         }
 
-        [Test]
         [TestCase(null, 8), 
         TestCase(null, 16), 
         TestCase("AnyName", 8), 
@@ -31,7 +30,6 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
             }
         }
 
-        [Test]
         [TestCase(null, 8), 
         TestCase(null, 16), 
         TestCase("AnyName", 8), 

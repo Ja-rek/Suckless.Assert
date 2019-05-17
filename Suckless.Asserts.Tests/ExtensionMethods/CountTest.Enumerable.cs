@@ -38,7 +38,6 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
             StubMetadata(value.ToArray()).Count(2, 3);
         }
 
-        [Test]
         [TestCase(null), TestCase("AnyName")]
         public void Count_WhenCountIsNotExactAsExpectedNumber_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
@@ -54,7 +53,6 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
                 expectedMessagePart);
         }
 
-        [Test] 
         [TestCase(null, new int[] { 1, 2 }), 
         TestCase(null, new int[] { 1, 2, 3, 4, 5 }), 
         TestCase("AnyName", new int[] { 1, 2 }),
@@ -72,7 +70,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
                 expectedMessagePart);
         }
 
-        [Test, TestCase(null), TestCase("AnyName")]
+        [TestCase(null), TestCase("AnyName")]
         public void Count_WhenAssertionFailedAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage(string fiedName)
         {
             var value = Enumerable.Range(1, 5);

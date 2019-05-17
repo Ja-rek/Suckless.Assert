@@ -15,7 +15,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
             }
         }
 
-        [Test, TestCase(null), TestCase("AnyName")]
+        [TestCase(null), TestCase("AnyName")]
         public void Greater_WhenNumberIsNotGreaterThanExpectedNumber_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
             var expectedMessagePart = $"contains the number 1 but should contain a number greater than 2.";
@@ -29,7 +29,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
             }
         }
 
-        [Test, TestCase(null), TestCase("AnyName")]
+        [TestCase(null), TestCase("AnyName")]
         public void Greater_WhenAssertionFailedAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
             foreach (var x in GreaterMethodByTypes(min: 2, value: 1, fieldName, CUSTOM_MESSAGE))

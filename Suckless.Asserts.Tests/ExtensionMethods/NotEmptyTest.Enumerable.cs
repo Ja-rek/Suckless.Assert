@@ -24,7 +24,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
             StubMetadata(value.ToArray()).NotEmpty();
         }
 
-        [Test, TestCase(null), TestCase("AnyName")]
+        [TestCase(null), TestCase("AnyName")]
         public void NotEmpty_WhenEnumerableIsEmpty_ThrowsException(string fieldName)
         {
             var value = Enumerable.Empty<int>();
@@ -39,7 +39,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
                 expectedMessagePart);
         }
 
-        [Test, TestCase(null), TestCase("AnyName")]
+        [TestCase(null), TestCase("AnyName")]
         public void NotEmpty_WhenAssertionFailedAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
             var value = Enumerable.Empty<int>();

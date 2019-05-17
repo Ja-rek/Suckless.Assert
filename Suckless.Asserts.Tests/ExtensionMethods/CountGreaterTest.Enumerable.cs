@@ -24,7 +24,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
             StubMetadata(value.ToArray()).CountGreater(3);
         }
 
-        [Test, TestCase(null), TestCase("AnyName")]
+        [TestCase(null), TestCase("AnyName")]
         public void CountGreater_WhenCountOfEnumerableIsNotGreater_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
             var expectedMessagePart = "contains 5 item/s but should contain more than 10.";
@@ -38,7 +38,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
                 expectedMessagePart);
         }
 
-        [Test, TestCase(null), TestCase("AnyName")]
+        [TestCase(null), TestCase("AnyName")]
         public void CountGreater_WhenCountOfEnumerableIsNotGreaterAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
             AssertCustomExceptionMessage(() => StubMetadata(value, fieldName).CountGreater(10, CUSTOM_MESSAGE), 

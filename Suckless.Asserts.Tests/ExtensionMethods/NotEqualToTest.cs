@@ -18,7 +18,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
             StubMetadata(1).NotEqualTo(2);
         }
 
-        [Test, TestCase(null), TestCase("AnyName")]
+        [TestCase(null), TestCase("AnyName")]
         public void NotEqualTo_WhenValueIsNotEqualToExpectedValue_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
             var messagePart = "that contain 1 cannot be equal to 1.";
@@ -28,7 +28,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
                 messagePart);
         }
 
-        [Test, TestCase(null), TestCase("AnyName")]
+        [TestCase(null), TestCase("AnyName")]
         public void NotEqualTo_WhenValueIsNotEqualToExpectedValueAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
             AssertCustomExceptionMessage(() => StubMetadata(1, fieldName).NotEqualTo(1, CUSTOM_MESSAGE), 

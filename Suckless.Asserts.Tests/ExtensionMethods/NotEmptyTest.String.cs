@@ -18,7 +18,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
             StubMetadata("Any").NotEmpty();
         }
 
-        [Test, TestCase(null), TestCase("AnyName")]
+        [TestCase(null), TestCase("AnyName")]
         public void NotEmpty_WhenStringIsEmpty_ThrowsException(string fieldName)
         {
             var expectedMessagePart = "cannot be empty.";
@@ -28,7 +28,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
                 expectedMessagePart);
         }
 
-        [Test, TestCase(null), TestCase("AnyName")]
+        [TestCase(null), TestCase("AnyName")]
         public void NotEmpty_WhenStringIsEmptyAndSpecifiedCustomeMessage_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
             var customeMessage = "Any message";

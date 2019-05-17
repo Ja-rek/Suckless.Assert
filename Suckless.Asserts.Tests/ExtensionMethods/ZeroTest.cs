@@ -12,7 +12,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
             foreach (var x in ZeroMethodByTypes(value: 0)) x.AssertZero.Invoke();
         }
 
-        [Test, TestCase(null), TestCase("AnyName")]
+        [TestCase(null), TestCase("AnyName")]
         public void Zero_WhenNumberIsNotZero_ThrowsException(string fieldName)
         {
             var expectedMessagePart = "must be zero.";
@@ -26,7 +26,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
             }
         }
 
-        [Test, TestCase(null), TestCase("AnyName")]
+        [TestCase(null), TestCase("AnyName")]
         public void Zero_WhenNumberIsNotZeroAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
             foreach (var x in ZeroMethodByTypes(value: 1, fieldName, CUSTOM_MESSAGE))

@@ -18,7 +18,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
             StubMetadata("1").CountLess(2);
         }
 
-        [Test, TestCase(null), TestCase("AnyName")]
+        [TestCase(null), TestCase("AnyName")]
         public void CountLess_WhenStringIsNotLessThanExpectedCharacters_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
             var expectedMessagePart = "contains 2 character/s but should contain less than 1.";
@@ -28,7 +28,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
                 expectedMessagePart);
         }
 
-        [Test, TestCase(null), TestCase("AnyName")]
+        [TestCase(null), TestCase("AnyName")]
         public void CountLess_WhenStringIsNotLessThanExpectedCharactersAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
             AssertCustomExceptionMessage(() => StubMetadata("12", fieldName).CountLess(1, CUSTOM_MESSAGE), 

@@ -12,7 +12,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
             StubMetadata("12").CountGreater(1);
         }
 
-        [Test, TestCase(null), TestCase("AnyName")]
+        [TestCase(null), TestCase("AnyName")]
         public void CountGreater_WhenStringIsNotGreaterThanExpectedCount_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
             var expectedMessagePart = "contains 1 character/s but should contain more than 2.";
@@ -22,7 +22,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
                 expectedMessagePart);
         }
 
-        [Test, TestCase(null), TestCase("AnyName")]
+        [TestCase(null), TestCase("AnyName")]
         public void CountGreater_WhenStringIsNotGreaterThan2AdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
             AssertCustomExceptionMessage(() => StubMetadata("1", fieldName).CountGreater(2, CUSTOM_MESSAGE), 

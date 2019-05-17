@@ -12,7 +12,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
             foreach (var x in NegativeMethodByTypes(value: -1)) x.AssertNegative.Invoke();
         }
 
-        [Test, TestCase(null), TestCase("AnyName")]
+        [TestCase(null), TestCase("AnyName")]
         public void Negative_WhenNumberIsNotNegative_ThrowsException(string fieldName)
         {
             var expectedMessagePart = "must be negative.";
@@ -26,7 +26,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
             }
         }
 
-        [Test, TestCase(null), TestCase("AnyName")]
+        [TestCase(null), TestCase("AnyName")]
         public void Negative_WhenNumberIsNotNegativeAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
             foreach (var x in NegativeMethodByTypes(value: 1, fieldName, CUSTOM_MESSAGE))

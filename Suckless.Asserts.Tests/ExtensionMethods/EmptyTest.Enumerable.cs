@@ -24,7 +24,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
             StubMetadata(valueStub.ToArray()).Empty();
         }
 
-        [Test, TestCase(null), TestCase("AnyName")]
+        [TestCase(null), TestCase("AnyName")]
         public void Empty_WhenEnumerableIsNotEmpty_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
             var value = Enumerable.Range(1, 2);
@@ -39,7 +39,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
                 expectedMessagePart);
         }
 
-        [Test, TestCase(null), TestCase("AnyName")]
+        [TestCase(null), TestCase("AnyName")]
         public void Empty_WhenAssertionFailedAdnCustomMessageWasSpecyfied__ThrowsExceptionWithCorrectMessage(string fieldName)
         {
             var value = Enumerable.Range(1, 2);

@@ -36,7 +36,6 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
                 expectedMessagePart);
         }
 
-        [Test] 
         [TestCase(null, "12"), 
         TestCase(null, "121232"), 
         TestCase("AnyName", "12"), 

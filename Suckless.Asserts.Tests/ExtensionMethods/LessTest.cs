@@ -12,7 +12,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
             foreach (var x in LessMethodByTypes(max: 2, value: 1)) x.AssertLess.Invoke();
         }
 
-        [Test, TestCase(null), TestCase("AnyName")]
+        [TestCase(null), TestCase("AnyName")]
         public void Less_WhenNumberIsNotLessThanExpectedNumber_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
             var expectedMessagePart = $"contains the number 2 but should contain a number less than 1.";
@@ -26,7 +26,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
             }
         }
 
-        [Test, TestCase(null), TestCase("AnyName")]
+        [TestCase(null), TestCase("AnyName")]
         public void Less_WhenAssertionFailedAdnCustomMessageWasSpecyfied_ThrowsExceptionWithCorrectMessage(string fieldName)
         {
             foreach (var x in LessMethodByTypes(max: 1, value: 2, fieldName, CUSTOM_MESSAGE))

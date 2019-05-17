@@ -3,3 +3,10 @@ build_script:
 
 test_script:
   - dotnet test Suckless.Asserts.Tests
+
+deploy:
+  provider: NuGet
+  api_key:
+    secure: xrW35hul2f+0VQV+6WEvziF5PzqiDBSuPAwBTOVkckNSCaEym0KU70wdahnkGBgu
+  skip_symbols: false
+  artifact: /.*\.nupkg/

@@ -11,7 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="ArgumentAssertions" Version="1.1.2.0" />
     <PackageReference Include="BenchmarkDotNet" Version="0.11.5" />
+    <PackageReference Include="Dawn.Guard" Version="1.8.0" />
+    <PackageReference Include="Seterlund.CodeGuard" Version="2.3.4" />
   </ItemGroup>
 
 </Project>

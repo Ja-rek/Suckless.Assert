@@ -6,7 +6,8 @@ namespace Suckless.Asserts.Benchmark
     {
         public static void Main(string[] args)
         {
-            var summary = BenchmarkRunner.Run<CreateMetadataTest>();
+            //var summary = BenchmarkRunner.Run<CreateMetadataTest>();
+            BenchmarkRunner.Run<CompareToOtherLibrieresTest>();
         }
     }
 }

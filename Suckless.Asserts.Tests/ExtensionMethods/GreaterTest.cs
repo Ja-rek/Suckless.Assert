@@ -7,7 +7,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
     internal class GreaterTest : AssertBaseTest<ArgumentOutOfRangeException> 
     {
         [Test]
-        public void Greater_WhenNumberIsGreaterThanExpectedNumber_DoNotThrowException()
+        public void Greater_WhenNumberIsGreaterThanExpectedNumber_DoesNotThrowException()
         {
             foreach (var x in GreaterMethodByTypes(min: 1, value: 2))
             {

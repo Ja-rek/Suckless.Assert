@@ -7,7 +7,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
     internal partial class CountGreaterTest : AssertBaseTest<ArgumentOutOfRangeException> 
     {
         [Test]
-        public void CountGreater_WhenStringIsGreaterThan1_DoNotThrowException()
+        public void CountGreater_WhenStringIsGreaterThan1_DoesNotThrowException()
         {
             StubMetadata("12").CountGreater(1);
         }

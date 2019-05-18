@@ -7,13 +7,13 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
     internal partial class CountLessTest : AssertBaseTest<ArgumentOutOfRangeException> 
     {
         [Test]
-        public void CountLess_WhenStringIsNull_DoNotThrowException()
+        public void CountLess_WhenStringIsNull_DoesNotThrowException()
         {
             StubMetadata<string>(null).CountLess(2);
         }
 
         [Test]
-        public void CountLess_WhenStringIsLessThanExpectedCharacters_DoNotThrowException()
+        public void CountLess_WhenStringIsLessThanExpectedCharacters_DoesNotThrowException()
         {
             StubMetadata("1").CountLess(2);
         }

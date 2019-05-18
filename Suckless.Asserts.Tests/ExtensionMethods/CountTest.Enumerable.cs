@@ -9,7 +9,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
     internal partial class CountTest : AssertBaseTest<ArgumentOutOfRangeException> 
     {
         [Test]
-        public void Count_WhenEnumerableIsNull_DoNotThrowException()
+        public void Count_WhenEnumerableIsNull_DoesNotThrowException()
         {
             IEnumerable<int> enumerable = null;
             int[] array = null;
@@ -21,7 +21,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
         }
 
         [Test]
-        public void Count_WhenCountIsExactAsExpectedNumber_DoNotThrowException()
+        public void Count_WhenCountIsExactAsExpectedNumber_DoesNotThrowException()
         {
             var value = Enumerable.Range(1, 3);
 
@@ -30,7 +30,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
         }
 
         [Test]
-        public void Count_WhenCountIsBetweenExpectedNumbers_DoNotThrowException()
+        public void Count_WhenCountIsBetweenExpectedNumbers_DoesNotThrowException()
         {
             var value = Enumerable.Range(1, 3);
 

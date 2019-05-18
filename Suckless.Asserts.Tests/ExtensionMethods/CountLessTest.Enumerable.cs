@@ -11,14 +11,14 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
         private IEnumerable<int> value = Enumerable.Range(1, 5);
 
         [Test]
-        public void CountLess_WhenEnumerableIsNull_DoNotThrowException()
+        public void CountLess_WhenEnumerableIsNull_DoesNotThrowException()
         {
             StubMetadata<IEnumerable<int>>(null).CountLess(2);
             StubMetadata<int[]>(null).CountLess(2);
         }
 
         [Test]
-        public void CountLess_WhenCountOfEnumerableIsLess_DoNotThrowException()
+        public void CountLess_WhenCountOfEnumerableIsLess_DoesNotThrowException()
         {
             StubMetadata(value).CountLess(6);
             StubMetadata(value.ToArray()).CountLess(6);

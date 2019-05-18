@@ -7,7 +7,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
     internal class FalseTest : AssertBaseTest<ArgumentException> 
     {
         [Test]
-        public void False_WhenValueIsEqualToExpectedValue_DoNotThrowException()
+        public void False_WhenValueIsEqualToExpectedValue_DoesNotThrowException()
         {
             StubMetadata(false).False();
         }

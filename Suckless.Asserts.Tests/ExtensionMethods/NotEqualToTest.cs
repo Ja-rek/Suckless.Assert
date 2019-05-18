@@ -7,13 +7,13 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
     internal partial class NotEqualToTest : AssertBaseTest<ArgumentException> 
     {
         [Test]
-        public void NotEqualTo_WhenValuesIsNull_DoNotThrowException()
+        public void NotEqualTo_WhenValuesIsNull_DoesNotThrowException()
         {
             StubMetadata<string>(null).NotEqualTo(1);
         }
 
         [Test]
-        public void NotEqualTo_WhenValueIsEqualToExpectedValue_DoNotThrowException()
+        public void NotEqualTo_WhenValueIsEqualToExpectedValue_DoesNotThrowException()
         {
             StubMetadata(1).NotEqualTo(2);
         }

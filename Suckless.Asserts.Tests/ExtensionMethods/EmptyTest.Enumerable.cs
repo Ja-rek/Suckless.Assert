@@ -9,14 +9,14 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
     internal partial class EmptyTest : AssertBaseTest<ArgumentOutOfRangeException> 
     {
         [Test]
-        public void Empty_WhenEnumerableIsNull_DoNotThrowException()
+        public void Empty_WhenEnumerableIsNull_DoesNotThrowException()
         {
             StubMetadata<IEnumerable<int>>(null).Empty();
             StubMetadata<int[]>(null).Empty();
         }
 
         [Test]
-        public void Empty_WhenEnumerableIsEmpty_DoNotThrowException()
+        public void Empty_WhenEnumerableIsEmpty_DoesNotThrowException()
         {
             var valueStub = Enumerable.Empty<int>();
 

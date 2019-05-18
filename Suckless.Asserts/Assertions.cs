@@ -65,9 +65,9 @@ namespace Suckless.Asserts
             }
         }
 
-        private static ArgumentNullException ExceptionNotNull<TValue>(TValue value, string name) 
+        private static ArgumentNullException ExceptionNotNull<TValue>(TValue value, string name, string message = null) 
         {
-            return new ArgumentNullException(name + "cannot be null.");
+           return new ArgumentNullException(null, message == null ? $"The {name} cannot be null." : message);
         }
     }
 }

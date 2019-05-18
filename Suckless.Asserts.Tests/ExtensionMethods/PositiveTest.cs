@@ -7,7 +7,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
     internal class PositiveTest : AssertBaseTest<ArgumentException>
     {
         [Test]
-        public void Positive_WhenNumberIsPositive_DoNotThrowException()
+        public void Positive_WhenNumberIsPositive_DoesNotThrowException()
         {
             foreach (var x in PositiveMethodByTypes(value: 1)) x.PositiveMethod.Invoke();
         }

@@ -7,13 +7,13 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
     internal partial class NotEmptyTest : AssertBaseTest<ArgumentOutOfRangeException> 
     {
         [Test]
-        public void NotEmpty_WhenAllowNullAndStringIsNull_DoNotThrowException()
+        public void NotEmpty_WhenAllowNullAndStringIsNull_DoesNotThrowException()
         {
             StubMetadata<string>(null).NotEmpty();
         }
 
         [Test]
-        public void NotEmpty_WhenStringIsNotEmpty_DoNotThrowException()
+        public void NotEmpty_WhenStringIsNotEmpty_DoesNotThrowException()
         {
             StubMetadata("Any").NotEmpty();
         }

@@ -7,7 +7,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
     internal class LessTest : AssertBaseTest<ArgumentOutOfRangeException> 
     {
         [Test]
-        public void Less_WhenNumberIsLessThanExpectedNumber_DoNotThrowException()
+        public void Less_WhenNumberIsLessThanExpectedNumber_DoesNotThrowException()
         {
             foreach (var x in LessMethodByTypes(max: 2, value: 1)) x.AssertLess.Invoke();
         }

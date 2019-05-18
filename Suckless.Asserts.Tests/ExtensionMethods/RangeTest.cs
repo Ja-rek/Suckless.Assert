@@ -8,7 +8,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
     internal class RangeTest : AssertBaseTest<ArgumentOutOfRangeException> 
     {
         [Test]
-        public void Range_WhenNumberIsInRange_DoNotThrowException()
+        public void Range_WhenNumberIsInRange_DoesNotThrowException()
         {
             foreach (var x in RangeMethodByTypes(min: 4, max: 6, value: 5)) x.AssertRange.Invoke();
         }

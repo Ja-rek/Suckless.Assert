@@ -11,14 +11,14 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
         private IEnumerable<int> value = Enumerable.Range(1, 5);
 
         [Test]
-        public void CountGreater_WhenEnumerableIsNull_DoNotThrowException()
+        public void CountGreater_WhenEnumerableIsNull_DoesNotThrowException()
         {
             StubMetadata<IEnumerable<int>>(null).CountGreater(2);
             StubMetadata<int[]>(null).CountGreater(2);
         }
 
         [Test]
-        public void CountGreater_WhenCountOfEnumerableIsGreater_DoNotThrowException()
+        public void CountGreater_WhenCountOfEnumerableIsGreater_DoesNotThrowException()
         {
             StubMetadata(value).CountGreater(3);
             StubMetadata(value.ToArray()).CountGreater(3);

@@ -8,19 +8,19 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
     internal partial class CountTest : AssertBaseTest<ArgumentOutOfRangeException> 
     {
         [Test]
-        public void Count_WhenAllowNullAndStringIsNull_DoNotThrowException()
+        public void Count_WhenAllowNullAndStringIsNull_DoesNotThrowException()
         {
             StubMetadata<string>(null).Count(1);
         }
 
         [Test]
-        public void Count_WhenCountIsExactAsExpedtedNumber_DoNotThrowException()
+        public void Count_WhenCountIsExactAsExpedtedNumber_DoesNotThrowException()
         {
             StubMetadata("123").Count(3);
         }
 
         [Test]
-        public void Count_WhenCountIsBetweenExpectedCharacters_DoNotThrowException()
+        public void Count_WhenCountIsBetweenExpectedCharacters_DoesNotThrowException()
         {
             StubMetadata("12345").Count(1, 5);
         }

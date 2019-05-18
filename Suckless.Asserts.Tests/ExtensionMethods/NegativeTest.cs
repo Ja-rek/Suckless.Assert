@@ -7,7 +7,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
     internal class NegativeTest : AssertBaseTest<ArgumentException>
     {
         [Test]
-        public void Negative_WhenNumberIsNegative_DoNotThrowException()
+        public void Negative_WhenNumberIsNegative_DoesNotThrowException()
         {
             foreach (var x in NegativeMethodByTypes(value: -1)) x.AssertNegative.Invoke();
         }

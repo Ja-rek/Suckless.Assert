@@ -7,7 +7,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
     internal class ZeroTest : AssertBaseTest<ArgumentException>
     {
         [Test]
-        public void Zero_WhenNumberIsZero_DoNotThrowException()
+        public void Zero_WhenNumberIsZero_DoesNotThrowException()
         {
             foreach (var x in ZeroMethodByTypes(value: 0)) x.AssertZero.Invoke();
         }

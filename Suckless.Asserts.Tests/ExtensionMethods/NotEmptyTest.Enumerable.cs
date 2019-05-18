@@ -9,14 +9,14 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
     internal partial class NotEmptyTest : AssertBaseTest<ArgumentOutOfRangeException> 
     {
         [Test]
-        public void NotEmpty_WhenEnumerableIsNull_DoNotThrowException()
+        public void NotEmpty_WhenEnumerableIsNull_DoesNotThrowException()
         {
             StubMetadata<IEnumerable<int>>(null).NotEmpty();
             StubMetadata<int[]>(null).NotEmpty();
         }
 
         [Test]
-        public void NotEmpty_WhenEnumerableIsNotEmpty_DoNotThrowException()
+        public void NotEmpty_WhenEnumerableIsNotEmpty_DoesNotThrowException()
         {
             var value = Enumerable.Range(1, 2);
 

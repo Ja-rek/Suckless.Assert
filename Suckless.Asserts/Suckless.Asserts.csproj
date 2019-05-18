@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>7.2</LangVersion>
     <Title>Suckless Assert</Title>
-    <Description>Library for expressing side effects by creating a contract for beginning value (arguments). This technique can be referred to as "design by contract", "defense programming" or "guard methods".</Description>
+    <Description>Library for expressing side effects by creating a contract for beginning value (arguments). This technique can be referred to as "design by contract", "defense programming" or "guard methods". The Suckless Assert is much faster and simpler than other similar libraries that support fluent API and can get field/property name by the lambda expression.  </Description>
     <PackageProjectUrl>https://github.com/Ja-rek/Suckless.Assert</PackageProjectUrl>
     <PackageTags>argument validation, argument assert, assert, guard, design by contract, defense programming</PackageTags>
     <PackageId>Suckless.Assert</PackageId>

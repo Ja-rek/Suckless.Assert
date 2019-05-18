@@ -1,13 +1,26 @@
-[![Build Status](https://travis-ci.org/robotology/osqp-eigen.svg?branch=master)](https://travis-ci.org/robotology/osqp-eigen)
-[![Build status](https://ci.appveyor.com/api/projects/status/ciycnb5lskga8kr1?svg=true)](https://ci.appveyor.com/project/Ja-rek/suckless-assert)
 
 # Suckless Assert
+
+[![Build Status](https://travis-ci.org/robotology/osqp-eigen.svg?branch=master)](https://travis-ci.org/robotology/osqp-eigen)
+[![Build status](https://ci.appveyor.com/api/projects/status/ciycnb5lskga8kr1?svg=true)](https://ci.appveyor.com/project/Ja-rek/suckless-assert)
+[![Build status](https://buildstats.info/nuget/Suckless.Assert?vWidth=60&dWidth=60)](https://www.nuget.org/packages/Suckless.Assert/)
+
 Library for expressing side effects by creating a contract for beginning value (arguments). This technique can be referred to as "design by contract", "defense programming" or "guard methods".
 The Suckless Assert is much faster and simpler than other similar libraries that support fluent API and can get field/property name by the lambda expression.
 
+## Instalation
+
+| CLI | Command |
+| ------ | ------ |
+| PM | Install-Package Suckless.Assert |
+| dotnet | add package Suckless.Assert |
+| paket | add Suckless.Assert |
+
+After that use:
+``using static Suckless.Asserts.Assertions;``
+
 ### Requirements 
-Netstandard2.0
-C# 7.2 or higher.
+Netstandard2.0, C# 7.2 or higher.
 
 ## Compare The API
 The Suckless Assert:

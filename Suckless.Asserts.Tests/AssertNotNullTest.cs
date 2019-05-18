@@ -21,7 +21,7 @@ namespace Suckless.Asserts.Tests
             string value = null;
 
             AssertExceptionMessage<string>(() => AssertNotNull(value, fieldName), 
-                expecteddName: fieldName,
+                expectedName: fieldName,
                 expectedMessagePart);
         }
 

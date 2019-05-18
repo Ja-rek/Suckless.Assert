@@ -20,10 +20,10 @@ namespace Suckless.Asserts.Tests.Base
         }
 
         protected void AssertExceptionMessage<TValue>(TestDelegate testDelegate, 
-            string expecteddName, 
+            string expectedName, 
             string expectedMessagePart)
         {
-            AssertExceptionMessage(testDelegate, typeof(TValue), expecteddName, expectedMessagePart);
+            AssertExceptionMessage(testDelegate, typeof(TValue), expectedName, expectedMessagePart);
         }
 
         protected void AssertExceptionMessage(TestDelegate testDelegate, 

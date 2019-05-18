@@ -30,11 +30,11 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
             var expectedMessagePart = "contains 5 item/s but should contain less than 3.";
 
             AssertExceptionMessage<IEnumerable<int>>(() => StubMetadata(value, fieldName).CountLess(3), 
-                expecteddName: fieldName, 
+                expectedName: fieldName, 
                 expectedMessagePart);
 
             AssertExceptionMessage<int[]>(() => StubMetadata(value.ToArray(), fieldName).CountLess(3), 
-                expecteddName: fieldName, 
+                expectedName: fieldName, 
                 expectedMessagePart);
         }
 

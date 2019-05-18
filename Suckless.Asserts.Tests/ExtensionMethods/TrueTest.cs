@@ -18,7 +18,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
             var expectedMessagePart = "must be true.";
 
             AssertExceptionMessage<bool>(() => StubMetadata(false, fieldName).True(), 
-                expecteddName: fieldName,
+                expectedName: fieldName,
                 expectedMessagePart);
         }
 

@@ -24,7 +24,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
             var messagePart = "that contain 1 should be equal to 2.";
 
             AssertExceptionMessage<int>(() => StubMetadata(1, fieldName).EqualTo(2), 
-                expecteddName: fieldName,
+                expectedName: fieldName,
                 messagePart);
         }
 

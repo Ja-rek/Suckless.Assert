@@ -24,7 +24,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
             var expectedMessagePart = "cannot be empty.";
 
             AssertExceptionMessage<string>(() => StubMetadata("", fieldName).NotEmpty(), 
-                expecteddName: fieldName, 
+                expectedName: fieldName, 
                 expectedMessagePart);
         }
 

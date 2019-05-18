@@ -18,7 +18,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
             var messagePart = "that contain 0 cannot be default.";
 
             AssertExceptionMessage<int>(() => StubMetadata<int>(default, fieldName).NotDefault(), 
-                expecteddName: fieldName,
+                expectedName: fieldName,
                 messagePart);
         }
 

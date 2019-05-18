@@ -24,7 +24,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
             var messagePart = "that contain 1 cannot be equal to 1.";
 
             AssertExceptionMessage<int>(() => StubMetadata(1, fieldName).NotEqualTo(1), 
-                expecteddName: fieldName,
+                expectedName: fieldName,
                 messagePart);
         }
 

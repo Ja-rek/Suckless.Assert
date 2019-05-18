@@ -24,7 +24,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
             var expectedMessagePart = "contains 2 character/s but should contain less than 1.";
 
             AssertExceptionMessage<string>(() => StubMetadata("12", fieldName).CountLess(1), 
-                expecteddName: fieldName, 
+                expectedName: fieldName, 
                 expectedMessagePart);
         }
 

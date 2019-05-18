@@ -32,7 +32,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
             var expectedMessagePart = "contains 3 character/s but should contain exact 5.";
 
             AssertExceptionMessage<string>(() => StubMetadata(value, fieldName).Count(5), 
-                expecteddName: fieldName, 
+                expectedName: fieldName, 
                 expectedMessagePart);
         }
 
@@ -45,7 +45,7 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
             var expectedMessagePart = $"contains {value.Count()} character/s but should contain between 3 - 4.";
 
             AssertExceptionMessage<string>(() => StubMetadata(value, fieldName).Count(3, 4), 
-                expecteddName: fieldName, 
+                expectedName: fieldName, 
                 expectedMessagePart);
         }
 

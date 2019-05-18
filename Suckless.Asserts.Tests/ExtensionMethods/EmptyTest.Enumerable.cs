@@ -31,11 +31,11 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
             var expectedMessagePart = "must be empty.";
 
             AssertExceptionMessage<IEnumerable<int>>(() => StubMetadata(value, fieldName).Empty(), 
-                expecteddName: fieldName, 
+                expectedName: fieldName, 
                 expectedMessagePart);
 
             AssertExceptionMessage<int[]>(() => StubMetadata(value.ToArray(), fieldName).Empty(), 
-                expecteddName: fieldName, 
+                expectedName: fieldName, 
                 expectedMessagePart);
         }
 

@@ -45,11 +45,11 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
             var expectedMessagePart = "contains 5 item/s but should contain exact 10.";
 
             AssertExceptionMessage<IEnumerable<int>>(() => StubMetadata(value, fieldName).Count(10), 
-                expecteddName: fieldName, 
+                expectedName: fieldName, 
                 expectedMessagePart);
 
             AssertExceptionMessage<int[]>(() => StubMetadata(value.ToArray(), fieldName).Count(10), 
-                expecteddName: fieldName, 
+                expectedName: fieldName, 
                 expectedMessagePart);
         }
 
@@ -62,11 +62,11 @@ namespace Suckless.Asserts.Tests.ExtensionMethods
             var expectedMessagePart = $"contains {value.Count()} item/s but should contain between 3 - 4.";
 
             AssertExceptionMessage<IEnumerable<int>>(() => StubMetadata(value, fieldName).Count(3, 4), 
-                expecteddName: fieldName, 
+                expectedName: fieldName, 
                 expectedMessagePart);
 
             AssertExceptionMessage<int[]>(() => StubMetadata(value.ToArray(), fieldName).Count(3, 4), 
-                expecteddName: fieldName, 
+                expectedName: fieldName, 
                 expectedMessagePart);
         }
 

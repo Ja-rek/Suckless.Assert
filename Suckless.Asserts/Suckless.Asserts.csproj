@@ -3,6 +3,15 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>7.2</LangVersion>
+    <Title>Suckless Assert</Title>
+    <Description>Library for expressing side effects by creating a contract for beginning value (arguments). This technique can be referred to as "design by contract", "defense programming" or "guard methods".</Description>
+    <PackageProjectUrl>https://github.com/Ja-rek/Suckless.Assert</PackageProjectUrl>
+    <PackageTags>argument validation, argument assert, assert, guard, design by contract, defense programming</PackageTags>
+    <PackageId>Suckless.Assert</PackageId>
+    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/Ja-rek/Suckless.Assert</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Version>1.0.0</Version>
   </PropertyGroup>
 
 </Project>
